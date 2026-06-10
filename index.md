@@ -1,21 +1,6 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="style.css">
-  <title>Michael A R Biggs</title>
-</head>
-<body>
-  <h1>{{ site.title }}</h1>
+---
+layout: default
+title: Home
+---
 
-  <nav>
-    <a href="/about.html">About</a> |
-    <a href="/research.html">Research</a> |
-    <a href="/publications.html">Publications</a>
-  </nav>
-
-<p>
-Website under construction
-</p>
-</body>
-</html>
+Website under construction.
