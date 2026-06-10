@@ -1,5 +1,12 @@
+---
+layout: default
+title: Publications
+---
+
+# Publications
+
 <p>
-PUBLICATIONS: (upload to UH, Zotero, Lattes, Academia, ResearchGate, PhilPapers)
+	PUBLICATIONS:
 </p><p>
 Biggs, Michael A.R. (2026) “What are the Problems Around a Lingua Franca?” Bull Eur Assoc Prof Emer 2026; 7 (1), 22-24. (1/4/20226)
 </br>
