@@ -6,7 +6,7 @@ title: Publications
 # Publications
 
 <span class="publication">
-Biggs, Michael A.R. (<span class="year">2026</span>) “What are the Problems Around a Lingua Franca?” Bull Eur Assoc Prof Emer 2026; 7 (1), 22-24. (1/4/20226)
+Biggs, Michael A.R. (<span class="year">2026</span>) “What are the Problems Around a Lingua Franca?” Bull Eur Assoc Prof Emer 2026; 7 (1), 22-24. (1/4/2026)
 <br>
 ISSN 2945-0381
 <br>
@@ -14,7 +14,7 @@ https://europemeriti.org/bulletin/EAPE_BULLETIN_ISSUE_2026-7-1_01-45.pdf
 </span>
 
 <span class="publication">
-Biggs, Michael A.R. (<span class="year">2026</span>) “Is Language Hegemony an Ethical Issue?” Bull Eur Assoc Prof Emer 2026; 7 (1), 24-27. (1/4/20226)
+Biggs, Michael A.R. (<span class="year">2026</span>) “Is Language Hegemony an Ethical Issue?” Bull Eur Assoc Prof Emer 2026; 7 (1), 24-27. (1/4/2026)
 <br>
 ISSN 2945-0381
 <br>
