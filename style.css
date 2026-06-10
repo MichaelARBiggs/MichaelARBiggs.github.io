@@ -1,144 +1,151 @@
-/* =====================================================
-Michael Biggs Academic Website
-style.css
-===================================================== */
+/* ================================
+   Academic Website (Sans-serif)
+   Michael A R Biggs
+   ================================ */
 
+/* Base layout */
 body {
-font-family: Georgia, "Times New Roman", serif;
-font-size: 18px;
-line-height: 1.7;
-color: #222222;
-background-color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont,
+                 "Segoe UI", Roboto, Helvetica, Arial,
+                 sans-serif;
 
-```
-max-width: 850px;
-margin: 0 auto;
-padding: 40px 30px;
-```
+    font-size: 17.5px;
+    line-height: 1.7;
+    color: #1a1a1a;
+    background-color: #ffffff;
 
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
 }
 
-/* =====================================================
-Headings
-===================================================== */
+/* ================================
+   Typography hierarchy
+   ================================ */
 
 h1 {
-font-size: 2.2em;
-font-weight: normal;
-color: #1b365d;
-margin-top: 0;
-margin-bottom: 0.6em;
+    font-size: 2.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #1b365d;
+    letter-spacing: -0.02em;
 }
 
 h2 {
-font-size: 1.4em;
-font-weight: normal;
-color: #1b365d;
-margin-top: 2em;
-margin-bottom: 0.6em;
-border-bottom: 1px solid #d8d8d8;
-padding-bottom: 0.2em;
+    font-size: 1.45rem;
+    font-weight: 600;
+    margin-top: 2.5rem;
+    margin-bottom: 0.8rem;
+    color: #1b365d;
+    border-bottom: 1px solid #e6e6e6;
+    padding-bottom: 0.3rem;
 }
 
 h3 {
-font-size: 1.15em;
-font-weight: bold;
-color: #333333;
-margin-top: 1.5em;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 1.6rem;
+    margin-bottom: 0.5rem;
+    color: #222;
 }
 
-/* =====================================================
-Navigation
-===================================================== */
+/* ================================
+   Navigation
+   ================================ */
 
 nav {
-margin-bottom: 2.5em;
-padding-bottom: 1em;
-border-bottom: 1px solid #d8d8d8;
+    margin: 1rem 0 2.5rem 0;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e6e6e6;
+    font-size: 0.95rem;
 }
 
 nav a {
-color: #1b365d;
-text-decoration: none;
-margin-right: 1.5em;
+    color: #1b365d;
+    text-decoration: none;
+    margin-right: 1rem;
+    font-weight: 500;
 }
 
 nav a:hover {
-text-decoration: underline;
+    text-decoration: underline;
 }
 
-/* =====================================================
-Links
-===================================================== */
+/* ================================
+   Content spacing
+   ================================ */
 
-a {
-color: #1b365d;
+main {
+    margin-top: 1rem;
 }
-
-a:hover {
-color: #274b7a;
-}
-
-/* =====================================================
-Paragraphs and Lists
-===================================================== */
 
 p {
-margin-bottom: 1em;
+    margin-bottom: 1.2rem;
 }
 
 ul, ol {
-margin-bottom: 1em;
+    margin-bottom: 1.2rem;
+    padding-left: 1.4rem;
 }
 
 li {
-margin-bottom: 0.4em;
+    margin-bottom: 0.4rem;
 }
 
-/* =====================================================
-Publications
-===================================================== */
+/* ================================
+   Links
+   ================================ */
+
+a {
+    color: #1b365d;
+}
+
+a:hover {
+    color: #274b7a;
+    text-decoration: underline;
+}
+
+/* ================================
+   Publications (future-ready)
+   ================================ */
 
 .publication {
-margin-bottom: 1.2em;
+    margin-bottom: 1.4rem;
 }
 
 .publication-title {
-font-style: italic;
+    font-weight: 500;
 }
 
-.publication-year {
-color: #666666;
+.publication-meta {
+    color: #666;
+    font-size: 0.95rem;
 }
 
-/* =====================================================
-Footer
-===================================================== */
+/* ================================
+   Footer (optional)
+   ================================ */
 
 footer {
-margin-top: 4em;
-padding-top: 1em;
-border-top: 1px solid #d8d8d8;
-color: #666666;
-font-size: 0.9em;
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e6e6e6;
+    font-size: 0.9rem;
+    color: #666;
 }
 
-/* =====================================================
-Responsive Layout
-===================================================== */
+/* ================================
+   Responsive adjustments
+   ================================ */
 
 @media (max-width: 700px) {
+    body {
+        font-size: 16.5px;
+        padding: 1.5rem 1rem;
+    }
 
-```
-body {
-    font-size: 17px;
-    padding: 20px;
-}
-
-nav a {
-    display: block;
-    margin-bottom: 0.5em;
-}
-```
-
+    nav a {
+        display: inline-block;
+        margin-bottom: 0.5rem;
+    }
 }
