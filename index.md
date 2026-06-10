@@ -6,7 +6,7 @@
   <title>Michael A R Biggs</title>
 </head>
 <body>
-  <h1>Michael A R Biggs</h1>
+  <h1>{{ site.title }}</h1>
 
   <nav>
     <a href="/about.html">About</a> |
