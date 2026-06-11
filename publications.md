@@ -590,9 +590,8 @@ Biggs, M.A.R. (1995) ‘Graphical Problems in Wittgenstein's Nachlaß’ in: Joh
 Biggs, M.A.R. and A. Pichler Wittgenstein: Two Source Catalogues and a Bibliography  Skriftserie fra Wittgensteinarkivet ved Universitetet i Bergen, No.7: Bergen, Norway, 1993.
 <br>ISBN 82-91071-06-3  175pp.
 <br>http://www.hit.uib.no/wab/el_texts/no7/no7.pdf
-</span>
-
-<span class="publication">
+<br>
+  <br>
 reviewed by Erich Ammereller in:
 <br>Philosophical Investigations 18(2) 173-177. Oxford, April 1995
 <br>ISSN 0190-0536
