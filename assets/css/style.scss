@@ -1,6 +1,23 @@
 ---
 ---
 
+@import "minima";
+
+/* YOUR OVERRIDES */
+
 body {
-  background: yellow !important;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
