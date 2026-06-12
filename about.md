@@ -1,9 +1,8 @@
 ---
-layout: default
+layout: page
 title: About
+permalink: /about/
 ---
-
-# About
 
 <p>
 <h2>Research interests</h2>
