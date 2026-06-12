@@ -214,5 +214,28 @@ Year 3 of the project adopted a sociological perspective on what we had previous
 
         <!-- end of repeating Projects list -->
 
+        
+
+    <script>
+    const headers = document.querySelectorAll('.accordion-header');
+
+    headers.forEach(header => {
+        header.addEventListener('click', () => {
+
+            const content = header.nextElementSibling;
+            const isOpen = content.style.display === 'block';
+
+            document.querySelectorAll('.accordion-content')
+                .forEach(panel => {
+                    panel.style.display = 'none';
+                });
+
+            if (!isOpen) {
+                content.style.display = 'block';
+            }
+        });
+    });
+    </script>
+
     </div>
 </div>
