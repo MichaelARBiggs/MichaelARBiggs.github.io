@@ -21,3 +21,29 @@ img {
   max-width: 100%;
   height: auto;
 }
+
+.hero {
+  margin: 3rem 0 4rem 0;
+}
+
+.hero h1 {
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  opacity: 0.75;
+}
+
+.section {
+  margin: 3rem 0;
+}
+
+.section h2 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 0.4rem;
+}
