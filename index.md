@@ -3,6 +3,22 @@ layout: default
 title: Home
 ---
 
-Website under construction (Stage 3)
+<div class="hero">
+  <h1>Michael A. R. Biggs</h1>
+  <p>Emeritus Professor of Aesthetics</p>
+</div>
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+<div class="section">
+  <h2>About</h2>
+  <p>...</p>
+</div>
+
+<div class="section">
+  <h2>Research</h2>
+  <p>...</p>
+</div>
+
+<div class="section">
+  <h2>Publications</h2>
+  <p>...</p>
+</div>
