@@ -1,46 +1,6 @@
 ---
 ---
 
-/* Import the existing Jekyll theme first */
-@import "{{ site.theme }}";
-
-/* ================================
-   YOUR RESPONSIVE OVERRIDES
-================================ */
-
-/* Improve readability + control width */
 body {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 24px;
-  font-size: 18px;
-  line-height: 1.7;
-}
-
-/* Ensure images never overflow screen */
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Responsive headings */
-h1 {
-  font-size: clamp(2rem, 4vw, 3rem);
-}
-
-h2 {
-  font-size: clamp(1.4rem, 3vw, 2rem);
-}
-
-/* Improve spacing rhythm */
-p {
-  margin-bottom: 1rem;
-}
-
-/* Mobile optimisation */
-@media (max-width: 768px) {
-  body {
-    padding: 16px;
-    font-size: 16px;
-  }
+  background: yellow !important;
 }
