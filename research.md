@@ -4,25 +4,217 @@ title: Research
 permalink: /research/
 ---
 
-<p>
-<h2>Speaking, Writing and Picturing</h2>
-</p><p>
-<h3>Description</h3>
-</p><p>
-This research focuses on the boundary of images and text, and how iconicity, notational conventions and grapholinguistics influence our recognition and interpretation of graphic signs.
-</p><p>
-<h3>Layman's description</h3>
-</p><p>
-How does our language influence the way we think? Does writing present different challenges to speaking? Can we use images to overcome the limitations of words? How should we approach the ineffable, and everything that seems to be beyond words, such as art, aesthetics, and ethics?
-</p><p>
-<h3>Key findings</h3>
-</p><p>
-Our two key touchstones are Wittgenstein's critique of aspect seeing, and the problem of liguistic relativity commonly (if incorrectly) known as the Sapir-Whorf hypothesis. We approach Wittgenstein's concept of "the limits of language", together with his practice of writing that includes images and diagrams, from the perspective of linguistics instead of the traditional approach from semiotics. We approach linguistic relativity from the perspective of writing systems instead of the spoken word. Our outcomes therefore inform text and image representation, the philosophy of action and performativity with words and images, non-linguistic communication, constructivism and phenomenology.
-</p><p>
-Acronym SWaP
-</p><p>
-Status Active
-</p><p>
-Effective start/end date 1/01/18 → …
-</p>
+<div class="research-page">
 
+    <h1>Research Projects</h1>
+
+    <div class="accordion">
+
+        <!-- PROJECT 7 -->
+        <div class="accordion-item">
+
+            <button class="accordion-header">
+                <span class="project-number">7</span>
+                <span class="project-title">Project Title Six</span>
+            </button>
+
+            <div class="accordion-content">
+
+                <h3>Description</h3>
+                <p>
+                    Formal academic description of the project.
+                </p>
+
+                <h3>Layman's Description</h3>
+                <p>
+                    Accessible explanation for non-specialists.
+                </p>
+
+                <h3>Key Findings</h3>
+                <ul>
+                    <li>Key finding one.</li>
+                    <li>Key finding two.</li>
+                    <li>Key finding three.</li>
+                </ul>
+
+            </div>
+        </div>
+
+        <!-- PROJECT 6 -->
+        <div class="accordion-item">
+
+            <button class="accordion-header">
+                <span class="project-number">6</span>
+                <span class="project-title">Project Title Five</span>
+            </button>
+
+            <div class="accordion-content">
+
+                <h3>Description</h3>
+                <p>
+                    Formal academic description of the project.
+                </p>
+
+                <h3>Layman's Description</h3>
+                <p>
+                    Accessible explanation for non-specialists.
+                </p>
+
+                <h3>Key Findings</h3>
+                <ul>
+                    <li>Key finding one.</li>
+                    <li>Key finding two.</li>
+                </ul>
+
+            </div>
+        </div>
+
+        <!-- PROJECT 5 -->
+        <div class="accordion-item">
+
+            <button class="accordion-header">
+                <span class="project-number">5</span>
+                <span class="project-title">Project Title Five</span>
+            </button>
+
+            <div class="accordion-content">
+
+                <h3>Description</h3>
+                <p>
+                    Formal academic description of the project.
+                </p>
+
+                <h3>Layman's Description</h3>
+                <p>
+                    Accessible explanation for non-specialists.
+                </p>
+
+                <h3>Key Findings</h3>
+                <ul>
+                    <li>Key finding one.</li>
+                    <li>Key finding two.</li>
+                </ul>
+
+            </div>
+        </div>
+
+        <!-- PROJECT 4 -->
+        <div class="accordion-item">
+
+            <button class="accordion-header">
+                <span class="project-number">4</span>
+                <span class="project-title">Project Title Five</span>
+            </button>
+
+            <div class="accordion-content">
+
+                <h3>Description</h3>
+                <p>
+                    Formal academic description of the project.
+                </p>
+
+                <h3>Layman's Description</h3>
+                <p>
+                    Accessible explanation for non-specialists.
+                </p>
+
+                <h3>Key Findings</h3>
+                <ul>
+                    <li>Key finding one.</li>
+                    <li>Key finding two.</li>
+                </ul>
+
+            </div>
+        </div>
+
+        <!-- PROJECT 3 -->
+        <div class="accordion-item">
+
+            <button class="accordion-header">
+                <span class="project-number">3</span>
+                <span class="project-title">Project Title Five</span>
+            </button>
+
+            <div class="accordion-content">
+
+                <h3>Description</h3>
+                <p>
+                    Formal academic description of the project.
+                </p>
+
+                <h3>Layman's Description</h3>
+                <p>
+                    Accessible explanation for non-specialists.
+                </p>
+
+                <h3>Key Findings</h3>
+                <ul>
+                    <li>Key finding one.</li>
+                    <li>Key finding two.</li>
+                </ul>
+
+            </div>
+        </div>
+
+        <!-- PROJECT 2 -->
+        <div class="accordion-item">
+
+            <button class="accordion-header">
+                <span class="project-number">2</span>
+                <span class="project-title">Project Title Five</span>
+            </button>
+
+            <div class="accordion-content">
+
+                <h3>Description</h3>
+                <p>
+                    Formal academic description of the project.
+                </p>
+
+                <h3>Layman's Description</h3>
+                <p>
+                    Accessible explanation for non-specialists.
+                </p>
+
+                <h3>Key Findings</h3>
+                <ul>
+                    <li>Key finding one.</li>
+                    <li>Key finding two.</li>
+                </ul>
+
+            </div>
+        </div>
+
+        <!-- PROJECT 1 -->
+        <div class="accordion-item">
+
+            <button class="accordion-header">
+                <span class="project-number">1</span>
+                <span class="project-title">Project Title Five</span>
+            </button>
+
+            <div class="accordion-content">
+
+                <h3>Description</h3>
+                <p>
+                    Formal academic description of the project.
+                </p>
+
+                <h3>Layman's Description</h3>
+                <p>
+                    Accessible explanation for non-specialists.
+                </p>
+
+                <h3>Key Findings</h3>
+                <ul>
+                    <li>Key finding one.</li>
+                    <li>Key finding two.</li>
+                </ul>
+
+            </div>
+        </div>
+
+        <!-- end of repeating Projects list -->
+
+    </div>
+</div>
