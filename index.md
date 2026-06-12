@@ -9,16 +9,15 @@ title: Home
 </div>
 
 <div class="section">
-  <h2>About</h2>
-  <p>...</p>
+  <h2>Overview</h2>
+  <p>Short positioning statement...</p>
 </div>
 
 <div class="section">
-  <h2>Research</h2>
-  <p>...</p>
-</div>
-
-<div class="section">
-  <h2>Publications</h2>
-  <p>...</p>
+  <h2>Explore</h2>
+  <ul>
+    <li><a href="/about/">About</a></li>
+    <li><a href="/research/">Research</a></li>
+    <li><a href="/publications/">Publications</a></li>
+  </ul>
 </div>
