@@ -1,9 +1,8 @@
 ---
-layout: default
+layout: page
 title: Research
+permalink: /research/
 ---
-
-# Research
 
 <p>
 <h2>Speaking, Writing and Picturing</h2>
