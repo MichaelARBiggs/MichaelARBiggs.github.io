@@ -1,3 +1,10 @@
 theme: minima
 title: Michael A R Biggs
 description: Academic website
+
+header_pages:
+  - index.md
+  - about.md
+  - research.md
+  - publications.md
+  
