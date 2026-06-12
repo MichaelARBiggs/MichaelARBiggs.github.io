@@ -3,10 +3,6 @@ layout: default
 title: Home
 ---
 
-<style>
-body {
-  background: yellow !important;
-}
-</style>
+## DEPLOY TEST 2026-06-12
 
-Website under construction
+If you can see this, the site is updating.
