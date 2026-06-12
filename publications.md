@@ -1,10 +1,10 @@
 ---
-layout: default
+layout: page
 title: Publications
+permalink: /publications/
 ---
 
-# Publications
-
+<span class="publication">
 Biggs, Michael A.R. (2026) “What are the Problems Around a Lingua Franca?” Bull Eur Assoc Prof Emer 2026; 7 (1), 22-24. (1/4/2026)
 <br>ISSN 2945-0381
 <br>https://europemeriti.org/bulletin/EAPE_BULLETIN_ISSUE_2026-7-1_01-45.pdf
