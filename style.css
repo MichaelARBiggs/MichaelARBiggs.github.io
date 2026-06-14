@@ -19,6 +19,12 @@ body {
     padding: 3rem 1.5rem;
 }
 
+div1 {
+    max-width: 750px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+}
+
 /* ================================
    Typography hierarchy
    ================================ */
@@ -26,6 +32,7 @@ body {
 h1 {
     font-size: 2.1rem;
     font-weight: 600;
+    text-decoration: none;
     margin-bottom: 1rem;
     color: #1b365d;
     letter-spacing: -0.02em;
@@ -68,7 +75,22 @@ nav a {
 }
 
 nav a:hover {
-    text-decoration: underline;
+    text-decoration: none;
+}
+
+/* ================================
+   Links
+   ================================ */
+
+
+a {
+    color: #1b365d;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #274b7a;
+    text-decoration: none;
 }
 
 /* ================================
@@ -93,16 +115,12 @@ li {
 }
 
 /* ================================
-   Links
+   Images
    ================================ */
 
-a {
-    color: #1b365d;
-}
-
-a:hover {
-    color: #274b7a;
-    text-decoration: underline;
+img:profile-image {
+    height: auto;
+    width: 100px;
 }
 
 /* ================================
@@ -186,6 +204,7 @@ footer {
 }
 
 .project-number {
+    display: none;
     width: 50px;
     font-size: 1.1rem;
     color: #888;
@@ -193,6 +212,16 @@ footer {
 }
 
 .project-title {
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+.project-acronym {
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+.project-dates {
     font-size: 1.5rem;
     font-weight: 400;
 }
