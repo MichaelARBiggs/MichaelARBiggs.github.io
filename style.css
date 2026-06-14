@@ -19,7 +19,7 @@ body {
     padding: 3rem 1.5rem;
 }
 
-div1 {
+div {
     max-width: 750px;
     margin: 0 auto;
     padding: 3rem 1.5rem;
@@ -123,22 +123,7 @@ li {
     width: 100px;
 }
 
-/* ================================
-   Publications
-   ================================ */
 
-.publication {
-    padding-bottom: 1.4rem;
-}
-
-.publication-title {
-    font-weight: 500;
-}
-
-.publication-meta {
-    color: #666;
-    font-size: 0.95rem;
-}
 
 /* ================================
    Footer (optional)
@@ -169,7 +154,7 @@ footer {
 }
 
 /* ================================
-   Research accordian
+   Research page inc accordian
    ================================ */
 
 .research-page {
@@ -251,4 +236,57 @@ footer {
 
 .accordion-content ul {
     padding-left: 20px;
+}
+
+/* ================================
+   Publications page
+   ================================ */
+
+.publications-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.publications-page h1 {
+    margin-bottom: 50px;
+    font-size: 2.5rem;
+    font-weight: 400;
+}
+
+.publication {
+    padding-bottom: 1.0rem;
+}
+
+.publication-title {
+    font-weight: 500;
+}
+
+.book-title {
+    font-style: italic;
+}
+
+.journal-title {
+    font-style: italic;
+}
+
+.publication-meta {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+/* ================================
+   About page
+   ================================ */
+
+.about-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.about-page h1 {
+    margin-bottom: 50px;
+    font-size: 2.5rem;
+    font-weight: 400;
 }
