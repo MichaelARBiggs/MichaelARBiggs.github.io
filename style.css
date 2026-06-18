@@ -174,7 +174,7 @@ footer {
 }
 
 .research-page h1 {
-    margin-bottom: 50px;
+    margin-bottom: 10px;
     font-size: 2.5rem;
     font-weight: 400;
 }
@@ -224,12 +224,12 @@ footer {
 
 .accordion-content {
     display: none;
-    padding-bottom: 40px;
+    padding-bottom: 0px;
     padding-left: 50px;
 }
 
 .accordion-content h3 {
-    margin-top: 30px;
+    margin-top: 10px;
     margin-bottom: 10px;
     font-size: 0.95rem;
     letter-spacing: 0.08em;
