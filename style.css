@@ -135,7 +135,14 @@ a:hover {
 
 td {
   text-align: left;
-  vertical-align: top;
+  vertical-align: middle;
+}
+
+td img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
 }
 
 
