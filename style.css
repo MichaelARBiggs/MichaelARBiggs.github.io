@@ -29,6 +29,11 @@ div {
     padding: 0.5rem 0.7rem;
 }
 
+.container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
 
 
 /* ================================
