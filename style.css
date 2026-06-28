@@ -57,6 +57,10 @@ li {
     margin-bottom: 0.4rem;
 }
 
+.no-break {
+  white-space: nowrap;
+}
+
 
 /* ================================
    Typography hierarchy
