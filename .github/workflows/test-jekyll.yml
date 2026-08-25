@@ -24,3 +24,9 @@ jobs:
 
       - name: Build Jekyll
         run: jekyll build
+
+      - name: Upload built site
+        uses: actions/upload-artifact@v4
+        with:
+          name: experimental-site
+          path: _site
