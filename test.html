@@ -18,45 +18,45 @@
     </main>
 
    <script>
-    // Try both methods of finding the Citation.js library variable
-    let Cite;
-    try {
-        Cite = require('citation-js');
-    } catch(e) {
-        Cite = window.cite;
-    }
+    // 1. Target the exact global variable used by the browser bundle
+    const Cite = window.cite;
 
-    // Safety check if the library itself didn't load from the CDN
+    // 2. Immediate safety fallback check
     if (!Cite) {
         document.getElementById('publications-list').innerHTML = 
-            "<strong>Error:</strong> The Citation.js library failed to load from the CDN.";
+            "<strong>Error:</strong> The Citation.js library failed to load from the CDN link.";
     } else {
-        // Fetch the file
+        // 3. Fetch the local repository file
         fetch('publications.bib')
             .then(response => {
+                // If GitHub returns a 404 or 500, throw a descriptive error instantly
                 if (!response.ok) {
-                    // This will tell us if it's a 404 Not Found error
                     throw new Error(`Server returned HTTP ${response.status} (${response.statusText})`);
                 }
                 return response.text();
             })
             .then(bibtexData => {
+                // 4. Parse the text data
                 const citeInstance = new Cite(bibtexData);
+
+                // 5. Generate standard formatting output
                 const formattedHtml = citeInstance.format('bibliography', {
                     format: 'html',
                     template: 'apa',
                     lang: 'en-US'
                 });
+
+                // 6. Push to page
                 document.getElementById('publications-list').innerHTML = formattedHtml;
             })
             .catch(error => {
-                console.error('Logged Error:', error);
-                // This injects the exact system error onto your screen!
+                // Instantly output the message so nothing hangs on screen
                 document.getElementById('publications-list').innerHTML = 
                     `<strong>Error details:</strong> ${error.message}`;
             });
     }
 </script>
+
 
 </body>
 </html>
