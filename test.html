@@ -19,10 +19,42 @@
         // Formatter to change "John Smith" or "Smith, John" into "Smith, J."
         function formatAuthorDateStyle(authorString) {
             if (!authorString) return 'Unknown Author';
-            
-            // Clean up LaTeX brackets from Pure export
-            const cleanString = authorString.replace(/[\{\}]/g, '');
-            
+
+            function decodeLatexAccents(text) {
+    if (!text) return '';
+    
+    return text
+        // 1. Double Quotation Marks
+        .replace(/``/g, '“')                    // LaTeX opening double quote
+        .replace(/''/g, '”')                    // LaTeX closing double quote
+        .replace(/\\"66/g, '“').replace(/\\"99/g, '”') // Alternative encodings
+        
+        // 2. Special Punctuation & Symbols
+        .replace(/!`|\\textexclamdown/g, '¡')   // Inverted exclamation mark
+        .replace(/\?`|\\textquestiondown/g, '¿') // Inverted question mark
+        .replace(/\\textordfeminine/g, 'ª')     // Feminine ordinal indicator
+        .replace(/\\textordmasculine/g, 'º')    // Masculine ordinal indicator
+        .replace(/\\SS\b|\{\\SS\}/g, 'ẞ')        // Capital sharp S
+        .replace(/\\ss\b|\{\\ss\}/g, 'ß')        // Small sharp S (for completeness)
+
+        // 3. Vowels with Acutes (í, á, é, ó, ú)
+        .replace(/\{\\'i\}/g, 'í').replace(/\\\'\{i\}/g, 'í').replace(/\\\'i/g, 'í')
+        .replace(/\{\\'a\}/g, 'á').replace(/\\\'\{a\}/g, 'á').replace(/\\\'a/g, 'á')
+        .replace(/\{\\'e\}/g, 'é').replace(/\\\'\{e\}/g, 'é').replace(/\\\'e/g, 'é')
+        .replace(/\{\\'o\}/g, 'ó').replace(/\\\'\{o\}/g, 'ó').replace(/\\\'o/g, 'ó')
+        .replace(/\{\\'u\}/g, 'ú').replace(/\\\'\{u\}/g, 'ú').replace(/\\\'u/g, 'ú')
+        
+        // 4. Vowels with Umlauts / Diaeresis (ï, ä, ë, ö, ü)
+        .replace(/\{\\"i\}/g, 'ï').replace(/\\\"\{i\}/g, 'ï').replace(/\\\"i/g, 'ï')
+        .replace(/\{\\"a\}/g, 'ä').replace(/\\\"\{a\}/g, 'ä').replace(/\\\"a/g, 'ä')
+        .replace(/\{\\"e\}/g, 'ë').replace(/\\\"\{e\}/g, 'ë').replace(/\\\"e/g, 'ë')
+        .replace(/\{\\"o\}/g, 'ö').replace(/\\\"\{o\}/g, 'ö').replace(/\\\"o/g, 'ö')
+        .replace(/\{\\"u\}/g, 'ü').replace(/\\\"\{u\}/g, 'ü').replace(/\\\"u/g, 'ü')
+
+        // 5. Final clean-up of raw structural LaTeX braces wrapping isolated letters
+        .replace(/[\{\}]/g, '');
+}
+      
             // Split multiple authors joined by " and "
             const authors = cleanString.split(/\s+and\s+/i);
             
