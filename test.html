@@ -16,11 +16,16 @@
     </main>
 
     <script>
-        // Formatter to change "John Smith" or "Smith, John" into "Smith, J."
+        
+    // Formatter to change "John Smith" or "Smith, John" into "Smith, J."
         function formatAuthorDateStyle(authorString) {
             if (!authorString) return 'Unknown Author';
+            
+            // Clean up LaTeX brackets from Pure export
+            const cleanString = authorString.replace(/[\{\}]/g, '');
+            
 
-    function decodeLatexAccents(text) {
+  function decodeLatexAccents(text) {
     if (!text) return '';
     
     return text
