@@ -16,93 +16,90 @@
     </main>
 
     <script>
-        
-    // Formatter to change "John Smith" or "Smith, John" into "Smith, J."
+        // 1. Comprehensive dictionary to decode LaTeX symbols and accents into clean Unicode
+        function decodeLatexAccents(text) {
+            if (!text) return '';
+            
+            return text
+                // Double Quotation Marks
+                .replace(/``/g, '“')                    
+                .replace(/''/g, '”')                    
+                .replace(/\\"66/g, '“').replace(/\\"99/g, '”') 
+                
+                // Special Punctuation & Symbols
+                .replace(/!`|\\textexclamdown/g, '¡')   
+                .replace(/\?`|\\textquestiondown/g, '¿') 
+                .replace(/\\textordfeminine/g, 'ª')     
+                .replace(/\\textordmasculine/g, 'º')    
+                .replace(/\\SS\b|\{\\SS\}/g, 'ẞ')        
+                .replace(/\\ss\b|\{\\ss\}/g, 'ß')        
+
+                // Vowels with Acutes (í, á, é, ó, ú)
+                .replace(/\{\\'i\}/g, 'í').replace(/\\\'\{i\}/g, 'í').replace(/\\\'i/g, 'í')
+                .replace(/\{\\'a\}/g, 'á').replace(/\\\'\{a\}/g, 'á').replace(/\\\'a/g, 'á')
+                .replace(/\{\\'e\}/g, 'é').replace(/\\\'\{e\}/g, 'é').replace(/\\\'e/g, 'é')
+                .replace(/\{\\'o\}/g, 'ó').replace(/\\\'\{o\}/g, 'ó').replace(/\\\'o/g, 'ó')
+                .replace(/\{\\'u\}/g, 'ú').replace(/\\\'\{u\}/g, 'ú').replace(/\\\'u/g, 'ú')
+                
+                // Vowels with Umlauts / Diaeresis (ï, ä, ë, ö, ü)
+                .replace(/\{\\"i\}/g, 'ï').replace(/\\\"\{i\}/g, 'ï').replace(/\\\"i/g, 'ï')
+                .replace(/\{\\"a\}/g, 'ä').replace(/\\\"\{a\}/g, 'ä').replace(/\\\"a/g, 'ä')
+                .replace(/\{\\"e\}/g, 'ë').replace(/\\\"\{e\}/g, 'ë').replace(/\\\"e/g, 'ë')
+                .replace(/\{\\"o\}/g, 'ö').replace(/\\\"\{o\}/g, 'ö').replace(/\\\"o/g, 'ö')
+                .replace(/\{\\"u\}/g, 'ü').replace(/\\\"\{u\}/g, 'ü').replace(/\\\"u/g, 'ü')
+
+                // Circumflex (â, ê, ô)
+                .replace(/\{\\^a\}/g, 'â').replace(/\\\^\{a\}/g, 'â').replace(/\\\^a/g, 'â')
+                .replace(/\{\\^e\}/g, 'ê').replace(/\\\^\{e\}/g, 'ê').replace(/\\\^e/g, 'ê')
+                .replace(/\{\\^o\}/g, 'ô').replace(/\\\^\{o\}/g, 'ô').replace(/\\\^o/g, 'ô')
+
+                // Tildes (ã, ẽ, õ)
+                .replace(/\{\\~a\}/g, 'ã').replace(/\\\~\{a\}/g, 'ã').replace(/\\\~a/g, 'ã')
+                .replace(/\{\\~e\}/g, 'ẽ').replace(/\\\~\{e\}/g, 'ẽ').replace(/\\\~e/g, 'ẽ')
+                .replace(/\{\\~o\}/g, 'õ').replace(/\\\~\{o\}/g, 'õ').replace(/\\\~o/g, 'õ')
+
+                // Ring (å) and Cedilla (ç)
+                .replace(/\{\\ra\}/g, 'å').replace(/\\r\{a\}/g, 'å').replace(/\\ra/g, 'å')
+                .replace(/\{\\cc\}/g, 'ç').replace(/\\c\{c\}/g, 'ç').replace(/\\cc/g, 'ç')
+
+                // Final structural LaTeX cleanup
+                .replace(/[\{\}]/g, '');
+        }
+
+        // 2. Reformat "Firstname Surname" or "Surname, Firstname" into Author-Date style ("Surname, F.")
         function formatAuthorDateStyle(authorString) {
             if (!authorString) return 'Unknown Author';
             
-            // Clean up LaTeX brackets from Pure export
-            const cleanString = authorString.replace(/[\{\}]/g, '');
+            // Clean up basic brackets first
+            const workingString = authorString.replace(/[\{\}]/g, '');
             
-
-  function decodeLatexAccents(text) {
-    if (!text) return '';
-    
-    return text
-        // 1. Double Quotation Marks
-        .replace(/``/g, '“')                    
-        .replace(/''/g, '”')                    
-        .replace(/\\"66/g, '“').replace(/\\"99/g, '”') 
-        
-        // 2. Special Punctuation & Symbols
-        .replace(/!`|\\textexclamdown/g, '¡')   
-        .replace(/\?`|\\textquestiondown/g, '¿') 
-        .replace(/\\textordfeminine/g, 'ª')     
-        .replace(/\\textordmasculine/g, 'º')    
-        .replace(/\\SS\b|\{\\SS\}/g, 'ẞ')        
-        .replace(/\\ss\b|\{\\ss\}/g, 'ß')        
-
-        // 3. Vowels with Acutes (í, á, é, ó, ú)
-        .replace(/\{\\'i\}/g, 'í').replace(/\\\'\{i\}/g, 'í').replace(/\\\'i/g, 'í')
-        .replace(/\{\\'a\}/g, 'á').replace(/\\\'\{a\}/g, 'á').replace(/\\\'a/g, 'á')
-        .replace(/\{\\'e\}/g, 'é').replace(/\\\'\{e\}/g, 'é').replace(/\\\'e/g, 'é')
-        .replace(/\{\\'o\}/g, 'ó').replace(/\\\'\{o\}/g, 'ó').replace(/\\\'o/g, 'ó')
-        .replace(/\{\\'u\}/g, 'ú').replace(/\\\'\{u\}/g, 'ú').replace(/\\\'u/g, 'ú')
-        
-        // 4. Vowels with Umlauts / Diaeresis (ï, ä, ë, ö, ü)
-        .replace(/\{\\"i\}/g, 'ï').replace(/\\\"\{i\}/g, 'ï').replace(/\\\"i/g, 'ï')
-        .replace(/\{\\"a\}/g, 'ä').replace(/\\\"\{a\}/g, 'ä').replace(/\\\"a/g, 'ä')
-        .replace(/\{\\"e\}/g, 'ë').replace(/\\\"\{e\}/g, 'ë').replace(/\\\"e/g, 'ë')
-        .replace(/\{\\"o\}/g, 'ö').replace(/\\\"\{o\}/g, 'ö').replace(/\\\"o/g, 'ö')
-        .replace(/\{\\"u\}/g, 'ü').replace(/\\\"\{u\}/g, 'ü').replace(/\\\"u/g, 'ü')
-
-        // 5. Circumflex (â, ê, ô)
-        .replace(/\{\\^a\}/g, 'â').replace(/\\\^\{a\}/g, 'â').replace(/\\\^a/g, 'â')
-        .replace(/\{\\^e\}/g, 'ê').replace(/\\\^\{e\}/g, 'ê').replace(/\\\^e/g, 'ê')
-        .replace(/\{\\^o\}/g, 'ô').replace(/\\\^\{o\}/g, 'ô').replace(/\\\^o/g, 'ô')
-
-        // 6. Tildes (ã, ẽ, õ)
-        .replace(/\{\\~a\}/g, 'ã').replace(/\\\~\{a\}/g, 'ã').replace(/\\\~a/g, 'ã')
-        .replace(/\{\\~e\}/g, 'ẽ').replace(/\\\~\{e\}/g, 'ẽ').replace(/\\\~e/g, 'ẽ')
-        .replace(/\{\\~o\}/g, 'õ').replace(/\\\~\{o\}/g, 'õ').replace(/\\\~o/g, 'õ')
-
-        // 7. Ring (å) and Cedilla (ç)
-        .replace(/\{\\ra\}/g, 'å').replace(/\\r\{a\}/g, 'å').replace(/\\ra/g, 'å')
-        .replace(/\{\\cc\}/g, 'ç').replace(/\\c\{c\}/g, 'ç').replace(/\\cc/g, 'ç')
-
-        // 8. Final clean-up of remaining structural brackets wrapping lone text letters
-        .replace(/[\{\}]/g, '');
-}
-
-      
-            // Split multiple authors joined by " and "
-            const authors = cleanString.split(/\s+and\s+/i);
+            // Split multiple authors joined by academic " and "
+            const authors = workingString.split(/\s+and\s+/i);
             
             const formattedAuthors = authors.map(author => {
                 let bits = author.trim();
                 if (bits.includes(',')) {
-                    // Already in "Surname, Firstname" format
                     const parts = bits.split(',');
                     const surname = parts[0].trim();
                     const firstname = parts[1].trim();
                     const initial = firstname.charAt(0).toUpperCase();
                     return `${surname}, ${initial}.`;
                 } else {
-                    // In "Firstname Surname" format
                     const parts = bits.split(/\s+/);
-                    if (parts.length === 1) return bits; // Fallback
-                    const surname = parts.pop(); // Get last name
-                    const initial = parts[0].charAt(0).toUpperCase();
+                    if (parts.length === 1) return bits; 
+                    const surname = parts.pop(); 
+                    const firstname = parts[0];
+                    const initial = firstname.charAt(0).toUpperCase();
                     return `${surname}, ${initial}.`;
                 }
             });
 
-            // Join authors seamlessly based on count
             if (formattedAuthors.length === 1) return formattedAuthors[0];
             if (formattedAuthors.length === 2) return formattedAuthors.join(' & ');
             return formattedAuthors.slice(0, -1).join(', ') + ' & ' + formattedAuthors[formattedAuthors.length - 1];
         }
 
+        // 3. Core BibTeX file reader
         function parseBibtex(text) {
             const entries = [];
             const blocks = text.split(/(?=@\w+\s*\{)/);
@@ -130,6 +127,7 @@
             return entries;
         }
 
+        // 4. Fetch loop and page builder
         fetch('publications.bib')
             .then(response => {
                 if (!response.ok) throw new Error(`HTTP ${response.status}: File not found`);
@@ -144,11 +142,11 @@
                 
                 let html = '<ul class="pub-list">';
                 papers.forEach(paper => {
-                    const formattedAuthors = formatAuthorDateStyle(paper.author);
-                    const cleanTitle = (paper.title || 'Untitled').replace(/[\{\}]/g, '');
-                    const venue = paper.journal || paper.booktitle || '';
+                    // Apply clean formats and decode international text
+                    const formattedAuthors = decodeLatexAccents(formatAuthorDateStyle(paper.author));
+                    const cleanTitle = decodeLatexAccents(paper.title || 'Untitled');
+                    const venue = decodeLatexAccents(paper.journal || paper.booktitle || '');
                     
-                    // HTML wrapped in highly targetable CSS classes
                     html += `
                         <li class="pub-item type-${paper.type}">
                             <span class="pub-author">${formattedAuthors}</span>
