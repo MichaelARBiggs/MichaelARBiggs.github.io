@@ -349,7 +349,7 @@ footer {
 
 /* 3. Author Block (Surname, Initials format) */
 .pub-author {
-    font-weight: 700;      /* Bold authors to anchor the citation */
+    font-weight: 500;      /* Bold authors to anchor the citation */
     color: #111111;
 }
 
@@ -361,13 +361,13 @@ footer {
 
 /* 5. Title Field (Enclosed in quotes by the script) */
 .pub-title {
-    font-style: italic;    /* Elegant italic emphasis */
+    font-weight: 500;      /* Medium weight for publishing source */
     color: #004b87;        /* Classic academic dark blue */
 }
 
 /* 6. Publication Venue (Journal Name or Book Title) */
 .pub-venue {
-    font-weight: 500;      /* Medium weight for publishing source */
+    font-style: italic;    /* Elegant italic emphasis */
     color: #2c3e50;
 }
 
