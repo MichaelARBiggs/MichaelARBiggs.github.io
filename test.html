@@ -67,32 +67,48 @@
                 .replace(/[\{\}]/g, '');
         }
 
-        // 2. Reformat "Firstname Surname" or "Surname, Firstname" into Author-Date style ("Surname, F.")
+            // 2. Reformat "Firstname Surname" or "Surname, Firstname" into Author-Date style ("Surname, F. J.")
         function formatAuthorDateStyle(authorString) {
             if (!authorString) return 'Unknown Author';
             
-            // Clean up basic brackets first
-            const workingString = authorString.replace(/[\{\}]/g, '');
+            // Clean up basic brackets and any accidental escaped periods or backslashes
+            let workingString = authorString
+                .replace(/[\{\}]/g, '')
+                .replace(/\\\s+/g, ' ')  // Fixes escaped spaces like "\ "
+                .replace(/\\\./g, '.')   // Fixes escaped periods like "\."
+                .replace(/\\/g, '');     // Strips out any other stray backslashes
             
             // Split multiple authors joined by academic " and "
             const authors = workingString.split(/\s+and\s+/i);
             
             const formattedAuthors = authors.map(author => {
                 let bits = author.trim();
+                let surname = '';
+                let firstname = '';
+
                 if (bits.includes(',')) {
                     const parts = bits.split(',');
-                    const surname = parts[0].trim();
-                    const firstname = parts[1].trim();
-                    const initial = firstname.charAt(0).toUpperCase();
-                    return `${surname}, ${initial}.`;
+                    surname = parts[0].trim();
+                    firstname = parts[1].trim();
                 } else {
                     const parts = bits.split(/\s+/);
                     if (parts.length === 1) return bits; 
-                    const surname = parts.pop(); 
-                    const firstname = parts[0];
-                    const initial = firstname.charAt(0).toUpperCase();
-                    return `${surname}, ${initial}.`;
+                    surname = parts.pop(); 
+                    firstname = parts.join(' ');
                 }
+
+                // Split firstname strings by spaces or hyphens to extract all given name parts
+                const nameParts = firstname.split(/[\s\-]+/);
+                const initials = nameParts
+                    .map(part => {
+                        // Strip punctuation/noise to look for a real letter
+                        const cleanPart = part.replace(/^[^a-zA-Z0-9]+/, '');
+                        return cleanPart ? cleanPart.charAt(0).toUpperCase() + '.' : '';
+                    })
+                    .filter(initial => initial !== '') // Drop empty parts
+                    .join(' '); // Formats as "F. J."
+
+                return initials ? `${surname}, ${initials}` : surname;
             });
 
             if (formattedAuthors.length === 1) return formattedAuthors[0];
