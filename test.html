@@ -11,27 +11,57 @@
     <main>
         <h1>Experimental Publications Feed</h1>
         
-        <!-- The visual presentation layout box -->
+        <!-- Target container for the styled list -->
         <div id="publications-list">Reading database file...</div>
     </main>
 
     <script>
-        // Simple manual parsing function to read BibTeX strings without external frameworks
+        // Formatter to change "John Smith" or "Smith, John" into "Smith, J."
+        function formatAuthorDateStyle(authorString) {
+            if (!authorString) return 'Unknown Author';
+            
+            // Clean up LaTeX brackets from Pure export
+            const cleanString = authorString.replace(/[\{\}]/g, '');
+            
+            // Split multiple authors joined by " and "
+            const authors = cleanString.split(/\s+and\s+/i);
+            
+            const formattedAuthors = authors.map(author => {
+                let bits = author.trim();
+                if (bits.includes(',')) {
+                    // Already in "Surname, Firstname" format
+                    const parts = bits.split(',');
+                    const surname = parts[0].trim();
+                    const firstname = parts[1].trim();
+                    const initial = firstname.charAt(0).toUpperCase();
+                    return `${surname}, ${initial}.`;
+                } else {
+                    // In "Firstname Surname" format
+                    const parts = bits.split(/\s+/);
+                    if (parts.length === 1) return bits; // Fallback
+                    const surname = parts.pop(); // Get last name
+                    const initial = parts[0].charAt(0).toUpperCase();
+                    return `${surname}, ${initial}.`;
+                }
+            });
+
+            // Join authors seamlessly based on count
+            if (formattedAuthors.length === 1) return formattedAuthors[0];
+            if (formattedAuthors.length === 2) return formattedAuthors.join(' & ');
+            return formattedAuthors.slice(0, -1).join(', ') + ' & ' + formattedAuthors[formattedAuthors.length - 1];
+        }
+
         function parseBibtex(text) {
             const entries = [];
-            // Split individual entry blocks starting with @
             const blocks = text.split(/(?=@\w+\s*\{)/);
             
             blocks.forEach(block => {
                 if (!block.trim()) return;
-                
                 const entry = {};
-                // Extract the entry type (e.g., article, inproceedings)
                 const typeMatch = block.match(/@(\w+)\s*\{/);
                 if (!typeMatch) return;
                 entry.type = typeMatch[1].toLowerCase();
                 
-                // Read standard key value patterns inside the brackets
                 const lines = block.split('\n');
                 lines.forEach(line => {
                     const cleanLine = line.trim();
@@ -39,18 +69,15 @@
                     if (match) {
                         const key = match[1].toLowerCase();
                         let value = match[2];
-                        // Strip trailing commas or braces
                         value = value.replace(/\}?,?$/, '').trim();
                         entry[key] = value;
                     }
                 });
-                
                 if (entry.title) entries.push(entry);
             });
             return entries;
         }
 
-        // Fetch your Pure repository file directly
         fetch('publications.bib')
             .then(response => {
                 if (!response.ok) throw new Error(`HTTP ${response.status}: File not found`);
@@ -58,30 +85,29 @@
             })
             .then(rawText => {
                 const papers = parseBibtex(rawText);
-                
                 if (papers.length === 0) {
-                    document.getElementById('publications-list').innerHTML = "No publications found in the file.";
+                    document.getElementById('publications-list').innerHTML = "No publications found.";
                     return;
                 }
                 
-                // Build pure clean HTML dynamically
-                let html = '<ul style="list-style-type: none; padding: 0;">';
+                let html = '<ul class="pub-list">';
                 papers.forEach(paper => {
-                    // Clean up author brackets if any exist from the Pure export
-                    const cleanAuthors = (paper.author || 'Unknown').replace(/[\{\}]/g, '');
+                    const formattedAuthors = formatAuthorDateStyle(paper.author);
                     const cleanTitle = (paper.title || 'Untitled').replace(/[\{\}]/g, '');
+                    const venue = paper.journal || paper.booktitle || '';
                     
+                    // HTML wrapped in highly targetable CSS classes
                     html += `
-                        <li style="margin-bottom: 24px; line-height: 1.5;">
-                            <div style="font-weight: bold; color: #222;">${cleanAuthors}</div>
-                            <div style="font-style: italic; color: #444; margin: 4px 0;">"${cleanTitle}"</div>
-                            <div style="font-size: 0.9em; color: #666;">
-                                ${paper.journal || paper.booktitle || 'Research Output'} 
-                                ${paper.year ? `(${paper.year})` : ''}
-                            </div>
+                        <li class="pub-item type-${paper.type}">
+                            <span class="pub-author">${formattedAuthors}</span>
+                            ${paper.year ? `<span class="pub-year">(${paper.year})</span>` : ''}
+                            <span class="pub-title">"${cleanTitle}"</span>
+                            ${venue ? `<span class="pub-venue">, ${venue}</span>` : ''}
+                            ${paper.volume ? `<span class="pub-volume">, vol. ${paper.volume}</span>` : ''}
+                            ${paper.pages ? `<span class="pub-pages">, pp. ${paper.pages}</span>` : ''}.
                             ${paper.doi ? `
-                                <div style="margin-top: 6px;">
-                                    <a href="https://doi.org{paper.doi}" target="_blank" style="color: #0066cc; font-size: 0.85em; text-decoration: none;">
+                                <div class="pub-doi-container">
+                                    <a href="https://doi.org{paper.doi}" target="_blank" class="pub-doi-link">
                                         🔗 View Publisher DOI
                                     </a>
                                 </div>
@@ -90,12 +116,10 @@
                     `;
                 });
                 html += '</ul>';
-                
                 document.getElementById('publications-list').innerHTML = html;
             })
             .catch(error => {
-                document.getElementById('publications-list').innerHTML = 
-                    `<span style="color: red; font-weight: bold;">Error:</span> ${error.message}`;
+                document.getElementById('publications-list').innerHTML = `<span class="pub-error">Error: ${error.message}</span>`;
             });
     </script>
 </body>
