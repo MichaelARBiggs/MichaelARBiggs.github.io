@@ -20,22 +20,22 @@
         function formatAuthorDateStyle(authorString) {
             if (!authorString) return 'Unknown Author';
 
-            function decodeLatexAccents(text) {
+    function decodeLatexAccents(text) {
     if (!text) return '';
     
     return text
         // 1. Double Quotation Marks
-        .replace(/``/g, '“')                    // LaTeX opening double quote
-        .replace(/''/g, '”')                    // LaTeX closing double quote
-        .replace(/\\"66/g, '“').replace(/\\"99/g, '”') // Alternative encodings
+        .replace(/``/g, '“')                    
+        .replace(/''/g, '”')                    
+        .replace(/\\"66/g, '“').replace(/\\"99/g, '”') 
         
         // 2. Special Punctuation & Symbols
-        .replace(/!`|\\textexclamdown/g, '¡')   // Inverted exclamation mark
-        .replace(/\?`|\\textquestiondown/g, '¿') // Inverted question mark
-        .replace(/\\textordfeminine/g, 'ª')     // Feminine ordinal indicator
-        .replace(/\\textordmasculine/g, 'º')    // Masculine ordinal indicator
-        .replace(/\\SS\b|\{\\SS\}/g, 'ẞ')        // Capital sharp S
-        .replace(/\\ss\b|\{\\ss\}/g, 'ß')        // Small sharp S (for completeness)
+        .replace(/!`|\\textexclamdown/g, '¡')   
+        .replace(/\?`|\\textquestiondown/g, '¿') 
+        .replace(/\\textordfeminine/g, 'ª')     
+        .replace(/\\textordmasculine/g, 'º')    
+        .replace(/\\SS\b|\{\\SS\}/g, 'ẞ')        
+        .replace(/\\ss\b|\{\\ss\}/g, 'ß')        
 
         // 3. Vowels with Acutes (í, á, é, ó, ú)
         .replace(/\{\\'i\}/g, 'í').replace(/\\\'\{i\}/g, 'í').replace(/\\\'i/g, 'í')
@@ -51,9 +51,24 @@
         .replace(/\{\\"o\}/g, 'ö').replace(/\\\"\{o\}/g, 'ö').replace(/\\\"o/g, 'ö')
         .replace(/\{\\"u\}/g, 'ü').replace(/\\\"\{u\}/g, 'ü').replace(/\\\"u/g, 'ü')
 
-        // 5. Final clean-up of raw structural LaTeX braces wrapping isolated letters
+        // 5. Circumflex (â, ê, ô)
+        .replace(/\{\\^a\}/g, 'â').replace(/\\\^\{a\}/g, 'â').replace(/\\\^a/g, 'â')
+        .replace(/\{\\^e\}/g, 'ê').replace(/\\\^\{e\}/g, 'ê').replace(/\\\^e/g, 'ê')
+        .replace(/\{\\^o\}/g, 'ô').replace(/\\\^\{o\}/g, 'ô').replace(/\\\^o/g, 'ô')
+
+        // 6. Tildes (ã, ẽ, õ)
+        .replace(/\{\\~a\}/g, 'ã').replace(/\\\~\{a\}/g, 'ã').replace(/\\\~a/g, 'ã')
+        .replace(/\{\\~e\}/g, 'ẽ').replace(/\\\~\{e\}/g, 'ẽ').replace(/\\\~e/g, 'ẽ')
+        .replace(/\{\\~o\}/g, 'õ').replace(/\\\~\{o\}/g, 'õ').replace(/\\\~o/g, 'õ')
+
+        // 7. Ring (å) and Cedilla (ç)
+        .replace(/\{\\ra\}/g, 'å').replace(/\\r\{a\}/g, 'å').replace(/\\ra/g, 'å')
+        .replace(/\{\\cc\}/g, 'ç').replace(/\\c\{c\}/g, 'ç').replace(/\\cc/g, 'ç')
+
+        // 8. Final clean-up of remaining structural brackets wrapping lone text letters
         .replace(/[\{\}]/g, '');
 }
+
       
             // Split multiple authors joined by " and "
             const authors = cleanString.split(/\s+and\s+/i);
