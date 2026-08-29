@@ -17,34 +17,46 @@
         <div id="publications-list">Loading repository data...</div>
     </main>
 
-    <script>
-        // Use the global window object provided by the CDN script
-        const Cite = require('citation-js');
+   <script>
+    // Try both methods of finding the Citation.js library variable
+    let Cite;
+    try {
+        Cite = require('citation-js');
+    } catch(e) {
+        Cite = window.cite;
+    }
 
-        // Fetch the file straight from your repository root
+    // Safety check if the library itself didn't load from the CDN
+    if (!Cite) {
+        document.getElementById('publications-list').innerHTML = 
+            "<strong>Error:</strong> The Citation.js library failed to load from the CDN.";
+    } else {
+        // Fetch the file
         fetch('publications.bib')
             .then(response => {
-                if (!response.ok) throw new Error('Network response was not ok');
+                if (!response.ok) {
+                    // This will tell us if it's a 404 Not Found error
+                    throw new Error(`Server returned HTTP ${response.status} (${response.statusText})`);
+                }
                 return response.text();
             })
             .then(bibtexData => {
-                // Parse the data
                 const citeInstance = new Cite(bibtexData);
-
-                // Format it into clean HTML (e.g., Vancouver or APA style)
                 const formattedHtml = citeInstance.format('bibliography', {
                     format: 'html',
                     template: 'apa',
                     lang: 'en-US'
                 });
-
-                // Display it
                 document.getElementById('publications-list').innerHTML = formattedHtml;
             })
             .catch(error => {
-                console.error('Error:', error);
-                document.getElementById('publications-list').innerHTML = 'Error loading the .bib catalog.';
+                console.error('Logged Error:', error);
+                // This injects the exact system error onto your screen!
+                document.getElementById('publications-list').innerHTML = 
+                    `<strong>Error details:</strong> ${error.message}`;
             });
-    </script>
+    }
+</script>
+
 </body>
 </html>
