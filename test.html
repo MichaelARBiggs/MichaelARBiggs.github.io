@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experimental Publications Page</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Load Citation.js via CDN -->
+    <script src="https://jsdelivr.net"></script>
+</head>
+<body>
+
+    <main>
+        <h1>Experimental Publications Feed</h1>
+        <!-- Container where your papers will automatically render -->
+        <div id="publications-list">Loading repository data...</div>
+    </main>
+
+    <script>
+        // Use the global window object provided by the CDN script
+        const Cite = window.cite;
+
+        // Fetch the file straight from your repository root
+        fetch('publications.bib')
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.text();
+            })
+            .then(bibtexData => {
+                // Parse the data
+                const citeInstance = new Cite(bibtexData);
+
+                // Format it into clean HTML (e.g., Vancouver or APA style)
+                const formattedHtml = citeInstance.format('bibliography', {
+                    format: 'html',
+                    template: 'apa',
+                    lang: 'en-US'
+                });
+
+                // Display it
+                document.getElementById('publications-list').innerHTML = formattedHtml;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('publications-list').innerHTML = 'Error loading the .bib catalog.';
+            });
+    </script>
+</body>
+</html>
