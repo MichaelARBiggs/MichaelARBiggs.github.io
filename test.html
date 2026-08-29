@@ -3,60 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Experimental Publications Page</title>
+    <title>Experimental Publications Feed</title>
     <link rel="stylesheet" href="style.css">
     
-    <!-- Load Citation.js via CDN -->
+    <!-- Load bibtex-js via a reliable vanilla-friendly CDN -->
     <script src="https://jsdelivr.net"></script>
 </head>
 <body>
 
     <main>
         <h1>Experimental Publications Feed</h1>
-        <!-- Container where your papers will automatically render -->
-        <div id="publications-list">Loading repository data...</div>
+        
+        <!-- Tell bibtex-js to automatically look for your file -->
+        <bibtex src="publications.bib"></bibtex>
+
+        <!-- This div will capture and structure your items automatically -->
+        <div id="bibtex_errors"></div>
+        <div id="bibtex_display">
+            <!-- This template layout dictates how each individual paper card looks -->
+            <div class="bibtex_template" style="display: none; margin-bottom: 20px;">
+                <div class="if author" style="font-weight: bold;">
+                    <span class="author"></span>
+                </div>
+                <div>
+                    <span class="title" style="font-style: italic;"></span> 
+                    <span class="if journal">, <span class="journal"></span></span>
+                    <span class="if year"> (<span class="year"></span>)</span>.
+                </div>
+                <div class="if doi" style="margin-top: 4px;">
+                    <a class="doi" href="" target="_blank" style="color: #0066cc; font-size: 0.9em;">View DOI Link</a>
+                </div>
+            </div>
+        </div>
     </main>
-
-   <script>
-    // 1. Target the exact global variable used by the browser bundle
-    const Cite = window.cite;
-
-    // 2. Immediate safety fallback check
-    if (!Cite) {
-        document.getElementById('publications-list').innerHTML = 
-            "<strong>Error:</strong> The Citation.js library failed to load from the CDN link.";
-    } else {
-        // 3. Fetch the local repository file
-        fetch('publications.bib')
-            .then(response => {
-                // If GitHub returns a 404 or 500, throw a descriptive error instantly
-                if (!response.ok) {
-                    throw new Error(`Server returned HTTP ${response.status} (${response.statusText})`);
-                }
-                return response.text();
-            })
-            .then(bibtexData => {
-                // 4. Parse the text data
-                const citeInstance = new Cite(bibtexData);
-
-                // 5. Generate standard formatting output
-                const formattedHtml = citeInstance.format('bibliography', {
-                    format: 'html',
-                    template: 'apa',
-                    lang: 'en-US'
-                });
-
-                // 6. Push to page
-                document.getElementById('publications-list').innerHTML = formattedHtml;
-            })
-            .catch(error => {
-                // Instantly output the message so nothing hangs on screen
-                document.getElementById('publications-list').innerHTML = 
-                    `<strong>Error details:</strong> ${error.message}`;
-            });
-    }
-</script>
-
 
 </body>
 </html>
