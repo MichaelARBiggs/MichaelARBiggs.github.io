@@ -171,11 +171,11 @@ html += `
                            <span class="pub-title">"${cleanTitle}"</span>
                            ${venue ? `<span class="pub-venue">, ${venue}</span>` : ''}
                            ${paper.volume ? `<span class="pub-volume">, vol. ${paper.volume}</span>` : ''}
-                           ${paper.pages ? `<span class="pub-pages">, pp. ${paper.pages}</span>` : ''}, `<span class="publisher">, 
-            ${paper.publisher}</span>`.
+                           ${paper.pages ? `<span class="pub-pages">, pp. ${paper.pages}</span>` : ''},
+                           ${paper.publisher ? `<span class="publisher">, pp. ${paper.publisher}</span>` : ''}.
                            ${paper.doi ? `
                                <div class="pub-doi-container">
-                                   <a href="https://doi.org${paper.doi}" target="_blank" class="pub-doi-link">
+                                   <a href="https://doi.org/${paper.doi}" target="_blank" class="pub-doi-link">
                                        🔗 View Publisher DOI
                                    </a>
                                </div>
