@@ -57,7 +57,7 @@ return text
 // Tildes (ã, ẽ, õ)
 .replace(/\{\\~a\}/g, 'ã').replace(/\\\~\{a\}/g, 'ã').replace(/\\\~a/g, 'ã')
 .replace(/\{\\~e\}/g, 'ẽ').replace(/\\\~\{e\}/g, 'ẽ').replace(/\\\~e/g, 'ẽ')
-.replace(/\{\\~o\}/g, 'ń').replace(/\\\~\{n\}/g, 'õ').replace(/\\\~n/g, 'ñ')
+.replace(/\{\\~n\}/g, 'ń').replace(/\\\~\{n\}/g, 'õ').replace(/\\\~n/g, 'ñ')
 .replace(/\{\\~o\}/g, 'õ').replace(/\\\~\{o\}/g, 'õ').replace(/\\\~o/g, 'õ')
 
 // Ring (å) and Cedilla (ç)
@@ -174,16 +174,9 @@ html += `
                            ${paper.volume ? `<span class="pub-volume">, vol. ${paper.volume}</span>` : ''}
                            ${paper.pages ? `<span class="pub-pages">, pp. ${paper.pages}</span>` : ''}.
                            ${paper.publisher ? `<span class="publisher">, vol. ${paper.publisher}</span>` : ''}
-                        </li>
-                        <li>
                            ${paper.issn ? `<span class="issn">, ISSN ${paper.issn}</span>` : ''}
-                        </li>
-                        <li>
                            ${paper.isbn ? `<span class="isbn">, ISBN ${paper.isbn}</span>` : ''}
-                        <li>
                            ${paper.url ? `<span class="url">, URL ${paper.url}</span>` : ''}
-                        </li>
-                        <li>
                            ${paper.doi ? `
                                <div class="pub-doi-container">
                                    <a href="https://doi.org/${paper.doi}" target="_blank" class="pub-doi-link">
