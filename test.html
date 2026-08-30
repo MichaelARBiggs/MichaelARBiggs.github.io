@@ -1,192 +1,666 @@
+```html
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Experimental Publications Feed</title>
-    <link rel="stylesheet" href="style.css">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Experimental Publications Feed</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
 
-    <main>
-        <h1>Experimental Publications Feed</h1>
-        
-        <!-- Target container for the styled list -->
-        <div id="publications-list">Reading database file...</div>
-    </main>
+<main>
 
-    <script>
-        // 1. Comprehensive dictionary to decode LaTeX symbols and accents into clean Unicode
-        function decodeLatexAccents(text) {
-            if (!text) return '';
-            
-            return text
-                // Double Quotation Marks
-                .replace(/``/g, '“')                    
-                .replace(/''/g, '”')                    
-                .replace(/\\"66/g, '“').replace(/\\"99/g, '”') 
-                
-                // Special Punctuation & Symbols
-                .replace(/!`|\\textexclamdown/g, '¡')   
-                .replace(/\?`|\\textquestiondown/g, '¿') 
-                .replace(/\\textordfeminine/g, 'ª')     
-                .replace(/\\textordmasculine/g, 'º')    
-                .replace(/\\SS\b|\{\\SS\}/g, 'ẞ')        
-                .replace(/\\ss\b|\{\\ss\}/g, 'ß')        
+<h1>Experimental Publications Feed</h1>
 
-                // Vowels with Acutes (í, á, é, ó, ú)
-                .replace(/\{\\'i\}/g, 'í').replace(/\\\'\{i\}/g, 'í').replace(/\\\'i/g, 'í')
-                .replace(/\{\\'a\}/g, 'á').replace(/\\\'\{a\}/g, 'á').replace(/\\\'a/g, 'á')
-                .replace(/\{\\'e\}/g, 'é').replace(/\\\'\{e\}/g, 'é').replace(/\\\'e/g, 'é')
-                .replace(/\{\\'o\}/g, 'ó').replace(/\\\'\{o\}/g, 'ó').replace(/\\\'o/g, 'ó')
-                .replace(/\{\\'u\}/g, 'ú').replace(/\\\'\{u\}/g, 'ú').replace(/\\\'u/g, 'ú')
-                
-                // Vowels with Umlauts / Diaeresis (ï, ä, ë, ö, ü)
-                .replace(/\{\\"i\}/g, 'ï').replace(/\\\"\{i\}/g, 'ï').replace(/\\\"i/g, 'ï')
-                .replace(/\{\\"a\}/g, 'ä').replace(/\\\"\{a\}/g, 'ä').replace(/\\\"a/g, 'ä')
-                .replace(/\{\\"e\}/g, 'ë').replace(/\\\"\{e\}/g, 'ë').replace(/\\\"e/g, 'ë')
-                .replace(/\{\\"o\}/g, 'ö').replace(/\\\"\{o\}/g, 'ö').replace(/\\\"o/g, 'ö')
-                .replace(/\{\\"u\}/g, 'ü').replace(/\\\"\{u\}/g, 'ü').replace(/\\\"u/g, 'ü')
+<!-- Target container for the styled list -->
 
-                // Circumflex (â, ê, ô)
-                .replace(/\{\\^a\}/g, 'â').replace(/\\\^\{a\}/g, 'â').replace(/\\\^a/g, 'â')
-                .replace(/\{\\^e\}/g, 'ê').replace(/\\\^\{e\}/g, 'ê').replace(/\\\^e/g, 'ê')
-                .replace(/\{\\^o\}/g, 'ô').replace(/\\\^\{o\}/g, 'ô').replace(/\\\^o/g, 'ô')
+<div id="publications-list">Reading database file...</div>
 
-                // Tildes (ã, ẽ, õ)
-                .replace(/\{\\~a\}/g, 'ã').replace(/\\\~\{a\}/g, 'ã').replace(/\\\~a/g, 'ã')
-                .replace(/\{\\~e\}/g, 'ẽ').replace(/\\\~\{e\}/g, 'ẽ').replace(/\\\~e/g, 'ẽ')
-                .replace(/\{\\~o\}/g, 'õ').replace(/\\\~\{o\}/g, 'õ').replace(/\\\~o/g, 'õ')
+</main>
 
-                // Ring (å) and Cedilla (ç)
-                .replace(/\{\\ra\}/g, 'å').replace(/\\r\{a\}/g, 'å').replace(/\\ra/g, 'å')
-                .replace(/\{\\cc\}/g, 'ç').replace(/\\c\{c\}/g, 'ç').replace(/\\cc/g, 'ç')
+<script>
 
-                // Final structural LaTeX cleanup
-                .replace(/[\{\}]/g, '');
-        }
+// 1. Comprehensive dictionary to decode LaTeX symbols and accents into clean Unicode
 
-            // 2. Reformat "Firstname Surname" or "Surname, Firstname" into Author-Date style ("Surname, F. J.")
-        function formatAuthorDateStyle(authorString) {
-            if (!authorString) return 'Unknown Author';
-            
-            // Clean up basic brackets and any accidental escaped periods or backslashes
-            let workingString = authorString
-                .replace(/[\{\}]/g, '')
-                .replace(/\\\s+/g, ' ')  // Fixes escaped spaces like "\ "
-                .replace(/\\\./g, '.')   // Fixes escaped periods like "\."
-                .replace(/\\/g, '');     // Strips out any other stray backslashes
-            
-            // Split multiple authors joined by academic " and "
-            const authors = workingString.split(/\s+and\s+/i);
-            
-            const formattedAuthors = authors.map(author => {
-                let bits = author.trim();
-                let surname = '';
-                let firstname = '';
+function decodeLatexAccents(text) {
 
-                if (bits.includes(',')) {
-                    const parts = bits.split(',');
-                    surname = parts[0].trim();
-                    firstname = parts[1].trim();
-                } else {
-                    const parts = bits.split(/\s+/);
-                    if (parts.length === 1) return bits; 
-                    surname = parts.pop(); 
-                    firstname = parts.join(' ');
-                }
+if (!text) return '';
 
-                // Split firstname strings by spaces or hyphens to extract all given name parts
-                const nameParts = firstname.split(/[\s\-]+/);
-                const initials = nameParts
-                    .map(part => {
-                        // Strip punctuation/noise to look for a real letter
-                        const cleanPart = part.replace(/^[^a-zA-Z0-9]+/, '');
-                        return cleanPart ? cleanPart.charAt(0).toUpperCase() + '.' : '';
-                    })
-                    .filter(initial => initial !== '') // Drop empty parts
-                    .join(' '); // Formats as "F. J."
+return text
 
-                return initials ? `${surname}, ${initials}` : surname;
-            });
+// Double Quotation Marks
+.replace(/``/g, '“')
+.replace(/''/g, '”')
 
-            if (formattedAuthors.length === 1) return formattedAuthors[0];
-            if (formattedAuthors.length === 2) return formattedAuthors.join(' & ');
-            return formattedAuthors.slice(0, -1).join(', ') + ' & ' + formattedAuthors[formattedAuthors.length - 1];
-        }
+// Special punctuation
+.replace(/!`/g, '¡')
+.replace(/\?`/g, '¿')
 
-        // 3. Core BibTeX file reader
-        function parseBibtex(text) {
-            const entries = [];
-            const blocks = text.split(/(?=@\w+\s*\{)/);
-            
-            blocks.forEach(block => {
-                if (!block.trim()) return;
-                const entry = {};
-                const typeMatch = block.match(/@(\w+)\s*\{/);
-                if (!typeMatch) return;
-                entry.type = typeMatch[1].toLowerCase();
-                
-                const lines = block.split('\n');
-                lines.forEach(line => {
-                    const cleanLine = line.trim();
-                    const match = cleanLine.match(/^(\w+)\s*=\s*[\{\"]?([\s\S]*?)[\}\"]?,?$/);
-                    if (match) {
-                        const key = match[1].toLowerCase();
-                        let value = match[2];
-                        value = value.replace(/\}?,?$/, '').trim();
-                        entry[key] = value;
-                    }
-                });
-                if (entry.title) entries.push(entry);
-            });
-            return entries;
-        }
+// Ordinal indicators
+.replace(/\\textordfeminine/g, 'ª')
+.replace(/\\textordmasculine/g, 'º')
 
-        // 4. Fetch loop and page builder
-        fetch('publications.bib')
-            .then(response => {
-                if (!response.ok) throw new Error(`HTTP ${response.status}: File not found`);
-                return response.text();
-            })
-            .then(rawText => {
-                const papers = parseBibtex(rawText);
-                if (papers.length === 0) {
-                    document.getElementById('publications-list').innerHTML = "No publications found.";
-                    return;
-                }
-                
-                let html = '<ul class="pub-list">';
-                papers.forEach(paper => {
-                    // Apply clean formats and decode international text
-                    const formattedAuthors = decodeLatexAccents(formatAuthorDateStyle(paper.author));
-                    const cleanTitle = decodeLatexAccents(paper.title || 'Untitled');
-                    const venue = decodeLatexAccents(paper.journal || paper.booktitle || '');
-                    
-                    html += `
-                        <li class="pub-item type-${paper.type}">
-                            <span class="pub-author">${formattedAuthors}</span>
-                            ${paper.year ? `<span class="pub-year">(${paper.year})</span>` : ''}
-                            <span class="pub-title">"${cleanTitle}"</span>
-                            ${venue ? `<span class="pub-venue">, ${venue}</span>` : ''}
-                            ${paper.volume ? `<span class="pub-volume">, vol. ${paper.volume}</span>` : ''}
-                            ${paper.pages ? `<span class="pub-pages">, pp. ${paper.pages}</span>` : ''}.
-                            ${paper.doi ? `
-                                <div class="pub-doi-container">
-                                    <a href="https://doi.org{paper.doi}" target="_blank" class="pub-doi-link">
-                                        🔗 View Publisher DOI
-                                    </a>
-                                </div>
-                            ` : ''}
-                        </li>
-                    `;
-                });
-                html += '</ul>';
-                document.getElementById('publications-list').innerHTML = html;
-            })
-            .catch(error => {
-                document.getElementById('publications-list').innerHTML = `<span class="pub-error">Error: ${error.message}</span>`;
-            });
-    </script>
+// German sharp S
+.replace(/\{\\SS\}/g, 'ẞ')
+.replace(/\\SS\b/g, 'ẞ')
+.replace(/\{\\ss\}/g, 'ß')
+.replace(/\\ss\b/g, 'ß')
+
+// Acute accents
+.replace(/\{\\'a\}/g, 'á')
+.replace(/\\'\{a\}/g, 'á')
+.replace(/\\'a/g, 'á')
+
+.replace(/\{\\'e\}/g, 'é')
+.replace(/\\'\{e\}/g, 'é')
+.replace(/\\'e/g, 'é')
+
+.replace(/\{\\'i\}/g, 'í')
+.replace(/\\'\{i\}/g, 'í')
+.replace(/\\'i/g, 'í')
+
+.replace(/\{\\'o\}/g, 'ó')
+.replace(/\\'\{o\}/g, 'ó')
+.replace(/\\'o/g, 'ó')
+
+.replace(/\{\\'u\}/g, 'ú')
+.replace(/\\'\{u\}/g, 'ú')
+.replace(/\\'u/g, 'ú')
+
+.replace(/\{\\'A\}/g, 'Á')
+.replace(/\\'\{A\}/g, 'Á')
+.replace(/\\'A/g, 'Á')
+
+.replace(/\{\\'E\}/g, 'É')
+.replace(/\\'\{E\}/g, 'É')
+.replace(/\\'E/g, 'É')
+
+.replace(/\{\\'I\}/g, 'Í')
+.replace(/\\'\{I\}/g, 'Í')
+.replace(/\\'I/g, 'Í')
+
+.replace(/\{\\'O\}/g, 'Ó')
+.replace(/\\'\{O\}/g, 'Ó')
+.replace(/\\'O/g, 'Ó')
+
+.replace(/\{\\'U\}/g, 'Ú')
+.replace(/\\'\{U\}/g, 'Ú')
+.replace(/\\'U/g, 'Ú')
+
+// Grave accents
+.replace(/\{\\`a\}/g, 'à')
+.replace(/\\`\{a\}/g, 'à')
+.replace(/\\`a/g, 'à')
+
+.replace(/\{\\`e\}/g, 'è')
+.replace(/\\`\{e\}/g, 'è')
+.replace(/\\`e/g, 'è')
+
+.replace(/\{\\`i\}/g, 'ì')
+.replace(/\\`\{i\}/g, 'ì')
+.replace(/\\`i/g, 'ì')
+
+.replace(/\{\\`o\}/g, 'ò')
+.replace(/\\`\{o\}/g, 'ò')
+.replace(/\\`o/g, 'ò')
+
+.replace(/\{\\`u\}/g, 'ù')
+.replace(/\\`\{u\}/g, 'ù')
+.replace(/\\`u/g, 'ù')
+
+.replace(/\{\\`A\}/g, 'À')
+.replace(/\\`\{A\}/g, 'À')
+.replace(/\\`A/g, 'À')
+
+.replace(/\{\\`E\}/g, 'È')
+.replace(/\\`\{E\}/g, 'È')
+.replace(/\\`E/g, 'È')
+
+.replace(/\{\\`I\}/g, 'Ì')
+.replace(/\\`\{I\}/g, 'Ì')
+.replace(/\\`I/g, 'Ì')
+
+.replace(/\{\\`O\}/g, 'Ò')
+.replace(/\\`\{O\}/g, 'Ò')
+.replace(/\\`O/g, 'Ò')
+
+.replace(/\{\\`U\}/g, 'Ù')
+.replace(/\\`\{U\}/g, 'Ù')
+.replace(/\\`U/g, 'Ù')
+
+// Umlauts / diaeresis
+.replace(/\{\\"a\}/g, 'ä')
+.replace(/\\"\{a\}/g, 'ä')
+.replace(/\\"a/g, 'ä')
+
+.replace(/\{\\"e\}/g, 'ë')
+.replace(/\\"\{e\}/g, 'ë')
+.replace(/\\"e/g, 'ë')
+
+.replace(/\{\\"i\}/g, 'ï')
+.replace(/\\"\{i\}/g, 'ï')
+.replace(/\\"i/g, 'ï')
+
+.replace(/\{\\"o\}/g, 'ö')
+.replace(/\\"\{o\}/g, 'ö')
+.replace(/\\"o/g, 'ö')
+
+.replace(/\{\\"u\}/g, 'ü')
+.replace(/\\"\{u\}/g, 'ü')
+.replace(/\\"u/g, 'ü')
+
+.replace(/\{\\"A\}/g, 'Ä')
+.replace(/\\"\{A\}/g, 'Ä')
+.replace(/\\"A/g, 'Ä')
+
+.replace(/\{\\"E\}/g, 'Ë')
+.replace(/\\"\{E\}/g, 'Ë')
+.replace(/\\"E/g, 'Ë')
+
+.replace(/\{\\"I\}/g, 'Ï')
+.replace(/\\"\{I\}/g, 'Ï')
+.replace(/\\"I/g, 'Ï')
+
+.replace(/\{\\"O\}/g, 'Ö')
+.replace(/\\"\{O\}/g, 'Ö')
+.replace(/\\"O/g, 'Ö')
+
+.replace(/\{\\"U\}/g, 'Ü')
+.replace(/\\"\{U\}/g, 'Ü')
+.replace(/\\"U/g, 'Ü')
+
+// Circumflex
+.replace(/\{\\\^a\}/g, 'â')
+.replace(/\\\^\{a\}/g, 'â')
+.replace(/\\\^a/g, 'â')
+
+.replace(/\{\\\^e\}/g, 'ê')
+.replace(/\\\^\{e\}/g, 'ê')
+.replace(/\\\^e/g, 'ê')
+
+.replace(/\{\\\^i\}/g, 'î')
+.replace(/\\\^\{i\}/g, 'î')
+.replace(/\\\^i/g, 'î')
+
+.replace(/\{\\\^o\}/g, 'ô')
+.replace(/\\\^\{o\}/g, 'ô')
+.replace(/\\\^o/g, 'ô')
+
+.replace(/\{\\\^u\}/g, 'û')
+.replace(/\\\^\{u\}/g, 'û')
+.replace(/\\\^u/g, 'û')
+
+.replace(/\{\\\^A\}/g, 'Â')
+.replace(/\\\^\{A\}/g, 'Â')
+.replace(/\\\^A/g, 'Â')
+
+.replace(/\{\\\^E\}/g, 'Ê')
+.replace(/\\\^\{E\}/g, 'Ê')
+.replace(/\\\^E/g, 'Ê')
+
+.replace(/\{\\\^I\}/g, 'Î')
+.replace(/\\\^\{I\}/g, 'Î')
+.replace(/\\\^I/g, 'Î')
+
+.replace(/\{\\\^O\}/g, 'Ô')
+.replace(/\\\^\{O\}/g, 'Ô')
+.replace(/\\\^O/g, 'Ô')
+
+.replace(/\{\\\^U\}/g, 'Û')
+.replace(/\\\^\{U\}/g, 'Û')
+.replace(/\\\^U/g, 'Û')
+
+// Tildes
+.replace(/\{\\~a\}/g, 'ã')
+.replace(/\\~\{a\}/g, 'ã')
+.replace(/\\~a/g, 'ã')
+
+.replace(/\{\\~e\}/g, 'ẽ')
+.replace(/\\~\{e\}/g, 'ẽ')
+.replace(/\\~e/g, 'ẽ')
+
+.replace(/\{\\~i\}/g, 'ĩ')
+.replace(/\\~\{i\}/g, 'ĩ')
+.replace(/\\~i/g, 'ĩ')
+
+.replace(/\{\\~o\}/g, 'õ')
+.replace(/\\~\{o\}/g, 'õ')
+.replace(/\\~o/g, 'õ')
+
+.replace(/\{\\~u\}/g, 'ũ')
+.replace(/\\~\{u\}/g, 'ũ')
+.replace(/\\~u/g, 'ũ')
+
+.replace(/\{\\~A\}/g, 'Ã')
+.replace(/\\~\{A\}/g, 'Ã')
+.replace(/\\~A/g, 'Ã')
+
+.replace(/\{\\~E\}/g, 'Ẽ')
+.replace(/\\~\{E\}/g, 'Ẽ')
+.replace(/\\~E/g, 'Ẽ')
+
+.replace(/\{\\~I\}/g, 'Ĩ')
+.replace(/\\~\{I\}/g, 'Ĩ')
+.replace(/\\~I/g, 'Ĩ')
+
+.replace(/\{\\~O\}/g, 'Õ')
+.replace(/\\~\{O\}/g, 'Õ')
+.replace(/\\~O/g, 'Õ')
+
+.replace(/\{\\~U\}/g, 'Ũ')
+.replace(/\\~\{U\}/g, 'Ũ')
+.replace(/\\~U/g, 'Ũ')
+
+// Ring above
+.replace(/\{\\r a\}/g, 'å')
+.replace(/\\r\{a\}/g, 'å')
+.replace(/\\r a/g, 'å')
+
+.replace(/\{\\r A\}/g, 'Å')
+.replace(/\\r\{A\}/g, 'Å')
+.replace(/\\r A/g, 'Å')
+
+// Cedilla
+.replace(/\{\\c c\}/g, 'ç')
+.replace(/\\c\{c\}/g, 'ç')
+.replace(/\\c c/g, 'ç')
+
+.replace(/\{\\c C\}/g, 'Ç')
+.replace(/\\c\{C\}/g, 'Ç')
+.replace(/\\c C/g, 'Ç')
+
+// Caron
+.replace(/\{\\v s\}/g, 'š')
+.replace(/\\v\{s\}/g, 'š')
+.replace(/\\v s/g, 'š')
+
+.replace(/\{\\v S\}/g, 'Š')
+.replace(/\\v\{S\}/g, 'Š')
+.replace(/\\v S/g, 'Š')
+
+.replace(/\{\\v z\}/g, 'ž')
+.replace(/\\v\{z\}/g, 'ž')
+.replace(/\\v z/g, 'ž')
+
+.replace(/\{\\v Z\}/g, 'Ž')
+.replace(/\\v\{Z\}/g, 'Ž')
+.replace(/\\v Z/g, 'Ž')
+
+// Stroke / slash characters
+.replace(/\{\\o\}/g, 'ø')
+.replace(/\\o\b/g, 'ø')
+
+.replace(/\{\\O\}/g, 'Ø')
+.replace(/\\O\b/g, 'Ø')
+
+.replace(/\{\\l\}/g, 'ł')
+.replace(/\\l\b/g, 'ł')
+
+.replace(/\{\\L\}/g, 'Ł')
+.replace(/\\L\b/g, 'Ł')
+
+// Æ / æ
+.replace(/\{\\ae\}/g, 'æ')
+.replace(/\\ae\b/g, 'æ')
+
+.replace(/\{\\AE\}/g, 'Æ')
+.replace(/\\AE\b/g, 'Æ')
+
+// Œ / œ
+.replace(/\{\\oe\}/g, 'œ')
+.replace(/\\oe\b/g, 'œ')
+
+.replace(/\{\\OE\}/g, 'Œ')
+.replace(/\\OE\b/g, 'Œ')
+
+// Eth
+.replace(/\{\\dh\}/g, 'ð')
+.replace(/\\dh\b/g, 'ð')
+
+.replace(/\{\\DH\}/g, 'Ð')
+.replace(/\\DH\b/g, 'Ð')
+
+// Thorn
+.replace(/\{\\th\}/g, 'þ')
+.replace(/\\th\b/g, 'þ')
+
+.replace(/\{\\TH\}/g, 'Þ')
+.replace(/\\TH\b/g, 'Þ')
+
+// Dot accents
+.replace(/\{\\\.z\}/g, 'ż')
+.replace(/\\\.\{z\}/g, 'ż')
+.replace(/\\\.z/g, 'ż')
+
+.replace(/\{\\\.Z\}/g, 'Ż')
+.replace(/\\\.\{Z\}/g, 'Ż')
+.replace(/\\\.Z/g, 'Ż')
+
+// Acute y
+.replace(/\{\\'y\}/g, 'ý')
+.replace(/\\'\{y\}/g, 'ý')
+.replace(/\\'y/g, 'ý')
+
+.replace(/\{\\'Y\}/g, 'Ý')
+.replace(/\\'\{Y\}/g, 'Ý')
+.replace(/\\'Y/g, 'Ý')
+
+// Diaeresis y
+.replace(/\{\\"y\}/g, 'ÿ')
+.replace(/\\"\{y\}/g, 'ÿ')
+.replace(/\\"y/g, 'ÿ')
+
+.replace(/\{\\"Y\}/g, 'Ÿ')
+.replace(/\\"\{Y\}/g, 'Ÿ')
+.replace(/\\"Y/g, 'Ÿ')
+
+// Polish / Nordic special characters
+.replace(/\{\\k a\}/g, 'ą')
+.replace(/\\k\{a\}/g, 'ą')
+
+.replace(/\{\\k A\}/g, 'Ą')
+.replace(/\\k\{A\}/g, 'Ą')
+
+.replace(/\{\\k e\}/g, 'ę')
+.replace(/\\k\{e\}/g, 'ę')
+
+.replace(/\{\\k E\}/g, 'Ę')
+.replace(/\\k\{E\}/g, 'Ę')
+
+// Dotless i
+.replace(/\{\i\}/g, 'ı')
+.replace(/\\i\b/g, 'ı')
+
+// Remove remaining structural braces
+.replace(/[\{\}]/g, '');
+
+}
+
+
+// 2. Reformat "Firstname Surname" or "Surname, Firstname"
+// into Author-Date style ("Surname, F. J.")
+
+function formatAuthorDateStyle(authorString) {
+
+if (!authorString) return 'Unknown Author';
+
+// Clean up basic brackets and escaped characters
+
+let workingString = authorString
+.replace(/[\{\}]/g, '')
+.replace(/\\\s+/g, ' ')
+.replace(/\\\./g, '.')
+.replace(/\\/g, '');
+
+// Split multiple authors joined by BibTeX's "and"
+
+const authors = workingString.split(/\s+and\s+/i);
+
+const formattedAuthors = authors.map(author => {
+
+let bits = author.trim();
+
+let surname = '';
+let firstname = '';
+
+if (bits.includes(',')) {
+
+const parts = bits.split(',');
+
+surname = parts[0].trim();
+firstname = parts.slice(1).join(',').trim();
+
+} else {
+
+const parts = bits.split(/\s+/);
+
+if (parts.length === 1) return bits;
+
+surname = parts.pop();
+firstname = parts.join(' ');
+
+}
+
+// Split firstname strings by spaces or hyphens
+
+const nameParts = firstname.split(/[\s\-]+/);
+
+const initials = nameParts
+
+.map(part => {
+
+// Keep Unicode letters, rather than restricting this to A-Z.
+// This allows names beginning with characters such as Ø, Ñ, Ł, Š, etc.
+
+const cleanPart = part.replace(
+/^[^\p{L}\p{M}]+/u,
+'');
+
+if (!cleanPart) return '';
+
+const firstLetter = Array.from(cleanPart)[0];
+
+return firstLetter
+? firstLetter.toLocaleUpperCase() + '.'
+: '';
+
+})
+
+.filter(initial => initial !== '')
+
+.join(' ');
+
+return initials ? `${surname}, ${initials}` : surname;
+
+});
+
+if (formattedAuthors.length === 1) return formattedAuthors[0];
+
+if (formattedAuthors.length === 2) {
+return formattedAuthors.join(' & ');
+}
+
+return formattedAuthors.slice(0, -1).join(', ')
++ ' & '
++ formattedAuthors[formattedAuthors.length - 1];
+
+}
+
+
+// 3. Core BibTeX file reader
+
+function parseBibtex(text) {
+
+const entries = [];
+
+const blocks = text.split(/(?=@\w+\s*\{)/);
+
+blocks.forEach(block => {
+
+if (!block.trim()) return;
+
+const entry = {};
+
+const typeMatch = block.match(/@(\w+)\s*\{/);
+
+if (!typeMatch) return;
+
+entry.type = typeMatch[1].toLowerCase();
+
+const lines = block.split('\n');
+
+lines.forEach(line => {
+
+const cleanLine = line.trim();
+
+const match = cleanLine.match(
+/^(\w+)\s*=\s*[\{\"]?([\s\S]*?)[\}\"]?,?$/
+);
+
+if (match) {
+
+const key = match[1].toLowerCase();
+
+let value = match[2];
+
+value = value.replace(/\}?,?$/, '').trim();
+
+entry[key] = value;
+
+}
+
+});
+
+if (entry.title) entries.push(entry);
+
+});
+
+return entries;
+
+}
+
+
+// 4. Fetch loop and page builder
+
+fetch('publications.bib')
+
+.then(response => {
+
+if (!response.ok) {
+throw new Error(`HTTP ${response.status}: File not found`);
+}
+
+return response.text();
+
+})
+
+.then(rawText => {
+
+const papers = parseBibtex(rawText);
+
+if (papers.length === 0) {
+
+document.getElementById('publications-list').innerHTML =
+"No publications found.";
+
+return;
+
+}
+
+let html = '<ul class="pub-list">';
+
+papers.forEach(paper => {
+
+// Apply clean formats and decode international text
+
+const formattedAuthors =
+decodeLatexAccents(formatAuthorDateStyle(paper.author));
+
+const cleanTitle =
+decodeLatexAccents(paper.title || 'Untitled');
+
+const venue =
+decodeLatexAccents(paper.journal || paper.booktitle || '');
+
+
+// Normalise DOI.
+// Accept either:
+//   10.1234/example
+// or:
+//   https://doi.org/10.1234/example
+
+let doiUrl = '';
+
+if (paper.doi) {
+
+let doi = decodeLatexAccents(paper.doi)
+.trim();
+
+doi = doi
+.replace(/^https?:\/\/doi\.org\//i, '')
+.replace(/^doi:\s*/i, '')
+.trim();
+
+if (doi) {
+doiUrl = `https://doi.org/${doi}`;
+}
+
+}
+
+
+html += `
+
+<li class="pub-item type-${paper.type}">
+
+<span class="pub-author">${formattedAuthors}</span>
+
+${paper.year
+? `<span class="pub-year">(${paper.year})</span>`
+: ''}
+
+<span class="pub-title">"${cleanTitle}"</span>
+
+${venue
+? `<span class="pub-venue">, ${venue}</span>`
+: ''}
+
+${paper.volume
+? `<span class="pub-volume">, vol. ${paper.volume}</span>`
+: ''}
+
+${paper.pages
+? `<span class="pub-pages">, pp. ${paper.pages}</span>`
+: ''}.
+
+${doiUrl
+? `
+
+<div class="pub-doi-container">
+
+<a href="${doiUrl}"
+   target="_blank"
+   rel="noopener noreferrer"
+   class="pub-doi-link">
+
+🔗 View Publisher DOI
+
+</a>
+
+</div>
+
+`
+: ''}
+
+</li>
+
+`;
+
+});
+
+html += '</ul>';
+
+document.getElementById('publications-list').innerHTML = html;
+
+})
+
+.catch(error => {
+
+document.getElementById('publications-list').innerHTML =
+`<span class="pub-error">Error: ${error.message}</span>`;
+
+});
+
+</script>
+
 </body>
+
 </html>
+```
