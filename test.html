@@ -54,334 +54,236 @@ return text
 .replace(/\{\\ss\}/g, 'ß')
 .replace(/\\ss\b/g, 'ß')
 
-// Acute accents
-.replace(/\{\\'a\}/g, 'á')
-.replace(/\\'\{a\}/g, 'á')
-.replace(/\\'a/g, 'á')
-
-.replace(/\{\\'e\}/g, 'é')
-.replace(/\\'\{e\}/g, 'é')
-.replace(/\\'e/g, 'é')
-
-.replace(/\{\\'i\}/g, 'í')
-.replace(/\\'\{i\}/g, 'í')
-.replace(/\\'i/g, 'í')
-
-.replace(/\{\\'o\}/g, 'ó')
-.replace(/\\'\{o\}/g, 'ó')
-.replace(/\\'o/g, 'ó')
-
-.replace(/\{\\'u\}/g, 'ú')
-.replace(/\\'\{u\}/g, 'ú')
-.replace(/\\'u/g, 'ú')
-
-.replace(/\{\\'A\}/g, 'Á')
-.replace(/\\'\{A\}/g, 'Á')
-.replace(/\\'A/g, 'Á')
-
-.replace(/\{\\'E\}/g, 'É')
-.replace(/\\'\{E\}/g, 'É')
-.replace(/\\'E/g, 'É')
-
-.replace(/\{\\'I\}/g, 'Í')
-.replace(/\\'\{I\}/g, 'Í')
-.replace(/\\'I/g, 'Í')
-
-.replace(/\{\\'O\}/g, 'Ó')
-.replace(/\\'\{O\}/g, 'Ó')
-.replace(/\\'O/g, 'Ó')
-
-.replace(/\{\\'U\}/g, 'Ú')
-.replace(/\\'\{U\}/g, 'Ú')
-.replace(/\\'U/g, 'Ú')
-
-// Grave accents
-.replace(/\{\\`a\}/g, 'à')
-.replace(/\\`\{a\}/g, 'à')
-.replace(/\\`a/g, 'à')
-
-.replace(/\{\\`e\}/g, 'è')
-.replace(/\\`\{e\}/g, 'è')
-.replace(/\\`e/g, 'è')
-
-.replace(/\{\\`i\}/g, 'ì')
-.replace(/\\`\{i\}/g, 'ì')
-.replace(/\\`i/g, 'ì')
-
-.replace(/\{\\`o\}/g, 'ò')
-.replace(/\\`\{o\}/g, 'ò')
-.replace(/\\`o/g, 'ò')
-
-.replace(/\{\\`u\}/g, 'ù')
-.replace(/\\`\{u\}/g, 'ù')
-.replace(/\\`u/g, 'ù')
-
-.replace(/\{\\`A\}/g, 'À')
-.replace(/\\`\{A\}/g, 'À')
-.replace(/\\`A/g, 'À')
-
-.replace(/\{\\`E\}/g, 'È')
-.replace(/\\`\{E\}/g, 'È')
-.replace(/\\`E/g, 'È')
-
-.replace(/\{\\`I\}/g, 'Ì')
-.replace(/\\`\{I\}/g, 'Ì')
-.replace(/\\`I/g, 'Ì')
-
-.replace(/\{\\`O\}/g, 'Ò')
-.replace(/\\`\{O\}/g, 'Ò')
-.replace(/\\`O/g, 'Ò')
-
-.replace(/\{\\`U\}/g, 'Ù')
-.replace(/\\`\{U\}/g, 'Ù')
-.replace(/\\`U/g, 'Ù')
-
-// Umlauts / diaeresis
-.replace(/\{\\"a\}/g, 'ä')
-.replace(/\\"\{a\}/g, 'ä')
-.replace(/\\"a/g, 'ä')
-
-.replace(/\{\\"e\}/g, 'ë')
-.replace(/\\"\{e\}/g, 'ë')
-.replace(/\\"e/g, 'ë')
-
-.replace(/\{\\"i\}/g, 'ï')
-.replace(/\\"\{i\}/g, 'ï')
-.replace(/\\"i/g, 'ï')
-
-.replace(/\{\\"o\}/g, 'ö')
-.replace(/\\"\{o\}/g, 'ö')
-.replace(/\\"o/g, 'ö')
-
-.replace(/\{\\"u\}/g, 'ü')
-.replace(/\\"\{u\}/g, 'ü')
-.replace(/\\"u/g, 'ü')
-
-.replace(/\{\\"A\}/g, 'Ä')
-.replace(/\\"\{A\}/g, 'Ä')
-.replace(/\\"A/g, 'Ä')
-
-.replace(/\{\\"E\}/g, 'Ë')
-.replace(/\\"\{E\}/g, 'Ë')
-.replace(/\\"E/g, 'Ë')
-
-.replace(/\{\\"I\}/g, 'Ï')
-.replace(/\\"\{I\}/g, 'Ï')
-.replace(/\\"I/g, 'Ï')
-
-.replace(/\{\\"O\}/g, 'Ö')
-.replace(/\\"\{O\}/g, 'Ö')
-.replace(/\\"O/g, 'Ö')
-
-.replace(/\{\\"U\}/g, 'Ü')
-.replace(/\\"\{U\}/g, 'Ü')
-.replace(/\\"U/g, 'Ü')
-
-// Circumflex
-.replace(/\{\\\^a\}/g, 'â')
-.replace(/\\\^\{a\}/g, 'â')
-.replace(/\\\^a/g, 'â')
-
-.replace(/\{\\\^e\}/g, 'ê')
-.replace(/\\\^\{e\}/g, 'ê')
-.replace(/\\\^e/g, 'ê')
-
-.replace(/\{\\\^i\}/g, 'î')
-.replace(/\\\^\{i\}/g, 'î')
-.replace(/\\\^i/g, 'î')
-
-.replace(/\{\\\^o\}/g, 'ô')
-.replace(/\\\^\{o\}/g, 'ô')
-.replace(/\\\^o/g, 'ô')
-
-.replace(/\{\\\^u\}/g, 'û')
-.replace(/\\\^\{u\}/g, 'û')
-.replace(/\\\^u/g, 'û')
-
-.replace(/\{\\\^A\}/g, 'Â')
-.replace(/\\\^\{A\}/g, 'Â')
-.replace(/\\\^A/g, 'Â')
-
-.replace(/\{\\\^E\}/g, 'Ê')
-.replace(/\\\^\{E\}/g, 'Ê')
-.replace(/\\\^E/g, 'Ê')
-
-.replace(/\{\\\^I\}/g, 'Î')
-.replace(/\\\^\{I\}/g, 'Î')
-.replace(/\\\^I/g, 'Î')
-
-.replace(/\{\\\^O\}/g, 'Ô')
-.replace(/\\\^\{O\}/g, 'Ô')
-.replace(/\\\^O/g, 'Ô')
-
-.replace(/\{\\\^U\}/g, 'Û')
-.replace(/\\\^\{U\}/g, 'Û')
-.replace(/\\\^U/g, 'Û')
-
-// Tildes
-.replace(/\{\\~a\}/g, 'ã')
-.replace(/\\~\{a\}/g, 'ã')
-.replace(/\\~a/g, 'ã')
 
-.replace(/\{\\~e\}/g, 'ẽ')
-.replace(/\\~\{e\}/g, 'ẽ')
-.replace(/\\~e/g, 'ẽ')
+function decodeLatexAccents(text) {
+
+    if (!text) return '';
+
+    let result = text;
+
+    // ------------------------------------------------------------
+    // LaTeX accent commands
+    //
+    // Handles forms such as:
+    //   {\'a}  \'a  {\`a}  \`a
+    //   {\^a}  \^a  {\"a}  \"a
+    //   {\~n}  \~n  {\c c} \c c
+    //   {\v s}  \v s
+    // ------------------------------------------------------------
+
+    const accentMap = {
+        "'": {
+            a: 'á', e: 'é', i: 'í', o: 'ó', u: 'ú',
+            A: 'Á', E: 'É', I: 'Í', O: 'Ó', U: 'Ú',
+            y: 'ý', Y: 'Ý'
+        },
+
+        "`": {
+            a: 'à', e: 'è', i: 'ì', o: 'ò', u: 'ù',
+            A: 'À', E: 'È', I: 'Ì', O: 'Ò', U: 'Ù'
+        },
+
+        '"': {
+            a: 'ä', e: 'ë', i: 'ï', o: 'ö', u: 'ü',
+            A: 'Ä', E: 'Ë', I: 'Ï', O: 'Ö', U: 'Ü',
+            y: 'ÿ', Y: 'Ÿ'
+        },
+
+        '^': {
+            a: 'â', e: 'ê', i: 'î', o: 'ô', u: 'û',
+            A: 'Â', E: 'Ê', I: 'Î', O: 'Ô', U: 'Û'
+        },
+
+        '~': {
+            a: 'ã', e: 'ẽ', i: 'ĩ', o: 'õ', u: 'ũ',
+            A: 'Ã', E: 'Ẽ', I: 'Ĩ', O: 'Õ', U: 'Ũ',
+            n: 'ñ', N: 'Ñ'
+        },
+
+        'v': {
+            a: 'ǎ', c: 'č', d: 'ď', e: 'ě',
+            l: 'ľ', n: 'ň', o: 'ǒ', r: 'ř',
+            s: 'š', t: 'ť', z: 'ž',
+            A: 'Ǎ', C: 'Č', D: 'Ď', E: 'Ě',
+            L: 'Ľ', N: 'Ň', O: 'Ǒ', R: 'Ř',
+            S: 'Š', T: 'Ť', Z: 'Ž'
+        },
+
+        '.': {
+            z: 'ż', Z: 'Ż'
+        },
+
+        'H': {
+            o: 'ő', O: 'Ő',
+            u: 'ű', U: 'Ű'
+        },
+
+        'u': {
+            a: 'ă', A: 'Ă',
+            g: 'ğ', G: 'Ğ'
+        }
+    };
+
+
+    // Apply accent commands with a braced character:
+    // {\c c}, {\'a}, {\"o}, {\~n}, etc.
+
+    for (const [command, characters] of Object.entries(accentMap)) {
+
+        for (const [letter, replacement] of Object.entries(characters)) {
+
+            const escapedCommand =
+                command.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-.replace(/\{\\~i\}/g, 'ĩ')
-.replace(/\\~\{i\}/g, 'ĩ')
-.replace(/\\~i/g, 'ĩ')
+            const escapedLetter =
+                letter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-.replace(/\{\\~o\}/g, 'õ')
-.replace(/\\~\{o\}/g, 'õ')
-.replace(/\\~o/g, 'õ')
+            // {\command letter}
+            const braced =
+                new RegExp(
+                    '\\{\\\\' +
+                    escapedCommand +
+                    '\\s*' +
+                    escapedLetter +
+                    '\\}',
+                    'g'
+                );
 
-.replace(/\{\\~u\}/g, 'ũ')
-.replace(/\\~\{u\}/g, 'ũ')
-.replace(/\\~u/g, 'ũ')
+            result = result.replace(braced, replacement);
 
-.replace(/\{\\~A\}/g, 'Ã')
-.replace(/\\~\{A\}/g, 'Ã')
-.replace(/\\~A/g, 'Ã')
+            // \command{letter}
+            const commandBracedLetter =
+                new RegExp(
+                    '\\\\' +
+                    escapedCommand +
+                    '\\s*\\{' +
+                    escapedLetter +
+                    '\\}',
+                    'g'
+                );
 
-.replace(/\{\\~E\}/g, 'Ẽ')
-.replace(/\\~\{E\}/g, 'Ẽ')
-.replace(/\\~E/g, 'Ẽ')
+            result = result.replace(
+                commandBracedLetter,
+                replacement
+            );
 
-.replace(/\{\\~I\}/g, 'Ĩ')
-.replace(/\\~\{I\}/g, 'Ĩ')
-.replace(/\\~I/g, 'Ĩ')
+            // \command letter
+            const unbraced =
+                new RegExp(
+                    '\\\\' +
+                    escapedCommand +
+                    '\\s*' +
+                    escapedLetter,
+                    'g'
+                );
 
-.replace(/\{\\~O\}/g, 'Õ')
-.replace(/\\~\{O\}/g, 'Õ')
-.replace(/\\~O/g, 'Õ')
+            result = result.replace(unbraced, replacement);
+        }
+    }
 
-.replace(/\{\\~U\}/g, 'Ũ')
-.replace(/\\~\{U\}/g, 'Ũ')
-.replace(/\\~U/g, 'Ũ')
 
-// Ring above
-.replace(/\{\\r a\}/g, 'å')
-.replace(/\\r\{a\}/g, 'å')
-.replace(/\\r a/g, 'å')
-
-.replace(/\{\\r A\}/g, 'Å')
-.replace(/\\r\{A\}/g, 'Å')
-.replace(/\\r A/g, 'Å')
-
-// Cedilla
-.replace(/\{\\c c\}/g, 'ç')
-.replace(/\\c\{c\}/g, 'ç')
-.replace(/\\c c/g, 'ç')
+    // ------------------------------------------------------------
+    // Special LaTeX characters represented by commands
+    // ------------------------------------------------------------
 
-.replace(/\{\\c C\}/g, 'Ç')
-.replace(/\\c\{C\}/g, 'Ç')
-.replace(/\\c C/g, 'Ç')
+    const specialCharacters = {
 
-// Caron
-.replace(/\{\\v s\}/g, 'š')
-.replace(/\\v\{s\}/g, 'š')
-.replace(/\\v s/g, 'š')
+        '\\c c': 'ç',
+        '\\c C': 'Ç',
 
-.replace(/\{\\v S\}/g, 'Š')
-.replace(/\\v\{S\}/g, 'Š')
-.replace(/\\v S/g, 'Š')
+        '\\c\\ c': 'ç',
+        '\\c\\ C': 'Ç',
 
-.replace(/\{\\v z\}/g, 'ž')
-.replace(/\\v\{z\}/g, 'ž')
-.replace(/\\v z/g, 'ž')
+        '\\o': 'ø',
+        '\\O': 'Ø',
 
-.replace(/\{\\v Z\}/g, 'Ž')
-.replace(/\\v\{Z\}/g, 'Ž')
-.replace(/\\v Z/g, 'Ž')
+        '\\ae': 'æ',
+        '\\AE': 'Æ',
 
-// Stroke / slash characters
-.replace(/\{\\o\}/g, 'ø')
-.replace(/\\o\b/g, 'ø')
+        '\\oe': 'œ',
+        '\\OE': 'Œ',
 
-.replace(/\{\\O\}/g, 'Ø')
-.replace(/\\O\b/g, 'Ø')
+        '\\l': 'ł',
+        '\\L': 'Ł',
 
-.replace(/\{\\l\}/g, 'ł')
-.replace(/\\l\b/g, 'ł')
+        '\\ss': 'ß',
+        '\\SS': 'ẞ',
 
-.replace(/\{\\L\}/g, 'Ł')
-.replace(/\\L\b/g, 'Ł')
+        '\\dh': 'ð',
+        '\\DH': 'Ð',
 
-// Æ / æ
-.replace(/\{\\ae\}/g, 'æ')
-.replace(/\\ae\b/g, 'æ')
+        '\\th': 'þ',
+        '\\TH': 'Þ',
 
-.replace(/\{\\AE\}/g, 'Æ')
-.replace(/\\AE\b/g, 'Æ')
+        '\\aa': 'å',
+        '\\AA': 'Å',
 
-// Œ / œ
-.replace(/\{\\oe\}/g, 'œ')
-.replace(/\\oe\b/g, 'œ')
+        '\\j': 'ȷ'
+    };
 
-.replace(/\{\\OE\}/g, 'Œ')
-.replace(/\\OE\b/g, 'Œ')
 
-// Eth
-.replace(/\{\\dh\}/g, 'ð')
-.replace(/\\dh\b/g, 'ð')
+    // Handle the particularly important cedilla syntax:
+    // {\c c} and {\c C}
 
-.replace(/\{\\DH\}/g, 'Ð')
-.replace(/\\DH\b/g, 'Ð')
+    result = result
+        .replace(/\{\\c\s*c\}/g, 'ç')
+        .replace(/\{\\c\s*C\}/g, 'Ç')
+        .replace(/\\c\s*c/g, 'ç')
+        .replace(/\\c\s*C/g, 'Ç');
 
-// Thorn
-.replace(/\{\\th\}/g, 'þ')
-.replace(/\\th\b/g, 'þ')
 
-.replace(/\{\\TH\}/g, 'Þ')
-.replace(/\\TH\b/g, 'Þ')
+    // Other special characters
 
-// Dot accents
-.replace(/\{\\\.z\}/g, 'ż')
-.replace(/\\\.\{z\}/g, 'ż')
-.replace(/\\\.z/g, 'ż')
+    for (const [latex, unicode] of Object.entries(specialCharacters)) {
 
-.replace(/\{\\\.Z\}/g, 'Ż')
-.replace(/\\\.\{Z\}/g, 'Ż')
-.replace(/\\\.Z/g, 'Ż')
+        const escaped =
+            latex.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-// Acute y
-.replace(/\{\\'y\}/g, 'ý')
-.replace(/\\'\{y\}/g, 'ý')
-.replace(/\\'y/g, 'ý')
+        result = result.replace(
+            new RegExp(escaped, 'g'),
+            unicode
+        );
+    }
 
-.replace(/\{\\'Y\}/g, 'Ý')
-.replace(/\\'\{Y\}/g, 'Ý')
-.replace(/\\'Y/g, 'Ý')
 
-// Diaeresis y
-.replace(/\{\\"y\}/g, 'ÿ')
-.replace(/\\"\{y\}/g, 'ÿ')
-.replace(/\\"y/g, 'ÿ')
+    // ------------------------------------------------------------
+    // LaTeX ligatures and punctuation
+    // ------------------------------------------------------------
 
-.replace(/\{\\"Y\}/g, 'Ÿ')
-.replace(/\\"\{Y\}/g, 'Ÿ')
-.replace(/\\"Y/g, 'Ÿ')
+    result = result
+        .replace(/``/g, '“')
+        .replace(/''/g, '”')
+        .replace(/!`/g, '¡')
+        .replace(/\?`/g, '¿')
+        .replace(/---/g, '—')
+        .replace(/--/g, '–');
 
-// Polish / Nordic special characters
-.replace(/\{\\k a\}/g, 'ą')
-.replace(/\\k\{a\}/g, 'ą')
 
-.replace(/\{\\k A\}/g, 'Ą')
-.replace(/\\k\{A\}/g, 'Ą')
+    // ------------------------------------------------------------
+    // Remove BibTeX grouping braces.
+    //
+    // At this point braces that were protecting accented characters
+    // have already been processed.
+    // ------------------------------------------------------------
 
-.replace(/\{\\k e\}/g, 'ę')
-.replace(/\\k\{e\}/g, 'ę')
+    result = result.replace(/[{}]/g, '');
 
-.replace(/\{\\k E\}/g, 'Ę')
-.replace(/\\k\{E\}/g, 'Ę')
 
-// Dotless i
-.replace(/\{\i\}/g, 'ı')
-.replace(/\\i\b/g, 'ı')
+    // ------------------------------------------------------------
+    // Remove LaTeX commands that may remain around text.
+    // ------------------------------------------------------------
 
-// Remove remaining structural braces
-.replace(/[\{\}]/g, '');
+    result = result
+        .replace(/\\textnormal\s*/g, '')
+        .replace(/\\textrm\s*/g, '')
+        .replace(/\\textit\s*/g, '')
+        .replace(/\\textbf\s*/g, '')
+        .replace(/\\emph\s*/g, '')
+        .replace(/\\LaTeX\b/g, 'LaTeX')
+        .replace(/\\TeX\b/g, 'TeX');
 
+
+    return result;
 }
 
 
