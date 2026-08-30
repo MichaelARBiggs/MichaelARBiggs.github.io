@@ -57,11 +57,12 @@ return text
 // Tildes (ã, ẽ, õ)
 .replace(/\{\\~a\}/g, 'ã').replace(/\\\~\{a\}/g, 'ã').replace(/\\\~a/g, 'ã')
 .replace(/\{\\~e\}/g, 'ẽ').replace(/\\\~\{e\}/g, 'ẽ').replace(/\\\~e/g, 'ẽ')
+.replace(/\{\\~o\}/g, 'ń').replace(/\\\~\{n\}/g, 'õ').replace(/\\\~n/g, 'ñ')
 .replace(/\{\\~o\}/g, 'õ').replace(/\\\~\{o\}/g, 'õ').replace(/\\\~o/g, 'õ')
 
 // Ring (å) and Cedilla (ç)
-.replace(/\{\\ra\}/g, 'å').replace(/\\r\{a\}/g, 'å').replace(/\\ra/g, 'å')
-.replace(/\{\\cc\}/g, 'ç').replace(/\\c\{c\}/g, 'ç').replace(/\\cc/g, 'ç')
+.replace(/\{\\ra\}/g, 'å').replace(/\\\r\{a\}/g, 'å').replace(/\\\ra/g, 'å')
+.replace(/\{\\cc\}/g, 'ç').replace(/\\\c\{c\}/g, 'ç').replace(/\\\cc/g, 'ç')
 
 // Final structural LaTeX cleanup
 .replace(/[\{\}]/g, '');
@@ -172,9 +173,12 @@ html += `
                            ${venue ? `<span class="pub-venue">, ${venue}</span>` : ''}
                            ${paper.volume ? `<span class="pub-volume">, vol. ${paper.volume}</span>` : ''}
                            ${paper.pages ? `<span class="pub-pages">, pp. ${paper.pages}</span>` : ''}.
+                           ${paper.publisher ? `<span class="publisher">, vol. ${paper.publisher}</span>` : ''}                           
+                           ${paper.issn ? `<span class="issn">, vol. ${paper.issn}</span>` : ''}
+                           ${paper.isbn ? `<span class="isbn">, vol. ${paper.isbn}</span>` : ''}
                            ${paper.doi ? `
                                <div class="pub-doi-container">
-                                   <a href="https://doi.org{paper.doi}" target="_blank" class="pub-doi-link">
+                                   <a href="https://doi.org/${paper.doi}" target="_blank" class="pub-doi-link">
                                        🔗 View Publisher DOI
                                    </a>
                                </div>
