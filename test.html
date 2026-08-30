@@ -173,9 +173,17 @@ html += `
                            ${venue ? `<span class="pub-venue">, ${venue}</span>` : ''}
                            ${paper.volume ? `<span class="pub-volume">, vol. ${paper.volume}</span>` : ''}
                            ${paper.pages ? `<span class="pub-pages">, pp. ${paper.pages}</span>` : ''}.
-                           ${paper.publisher ? `<span class="publisher">, vol. ${paper.publisher}</span>` : ''}                           
-                           ${paper.issn ? `<span class="issn">, vol. ${paper.issn}</span>` : ''}
-                           ${paper.isbn ? `<span class="isbn">, vol. ${paper.isbn}</span>` : ''}
+                           ${paper.publisher ? `<span class="publisher">, vol. ${paper.publisher}</span>` : ''}
+                        </li>
+                        <li>
+                           ${paper.issn ? `<span class="issn">, ISSN ${paper.issn}</span>` : ''}
+                        </li>
+                        <li>
+                           ${paper.isbn ? `<span class="isbn">, ISBN ${paper.isbn}</span>` : ''}
+                        <li>
+                           ${paper.url ? `<span class="url">, URL ${paper.url}</span>` : ''}
+                        </li>
+                        <li>
                            ${paper.doi ? `
                                <div class="pub-doi-container">
                                    <a href="https://doi.org/${paper.doi}" target="_blank" class="pub-doi-link">
